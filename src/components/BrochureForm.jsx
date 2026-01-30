@@ -17,7 +17,7 @@ const BrochureForm = ({ onClose }) => {
     name: "",
     mobile: "",
     email: "",
-    source: "satyammetroshowstoppers.in",
+    source: "godrejkhargar.com",
   });
 
   const validateForm = (formData) => {
@@ -106,7 +106,7 @@ const BrochureForm = ({ onClose }) => {
         });
       }
       setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "", source: "satyammetroshowstoppers.in" });
+      setFormData({ name: "", mobile: "", email: "", source: "godrejkhargar.com" });
     } else {
       setShowFailureAlert(true);
     }

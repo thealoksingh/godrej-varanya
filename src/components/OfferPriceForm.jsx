@@ -9,7 +9,7 @@ const OfferPriceForm = ({ onClose, type }) => {
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
-    source:'satyammetroshowstoppers.in',
+    source:'godrejkhargar.com',
   });
 
   const [loading, setLoading] = useState(false);
@@ -113,7 +113,7 @@ const handleSubmit = async (e) => {
       });
     }
     setShowSuccessAlert(true);
-    setFormData({ name: '', mobile: '', source:'satyammetroshowstoppers.in' });
+    setFormData({ name: '', mobile: '', source:'godrejkhargar.com' });
   } else {
     setShowFailureAlert(true);
   }

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
-import shitalIcon from "../assets/shital.gif";
+import shitalIcon from "../assets/gifs/shital.gif";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";

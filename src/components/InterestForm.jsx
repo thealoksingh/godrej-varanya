@@ -11,7 +11,7 @@ const InterestForm = ({ onClose, mode }) => {
     name: '',
     mobile: '',
     email: '',
-    source:'satyammetroshowstoppers.in',
+    source:'godrejkhargar.com',
   });
 
   const [loading, setLoading] = useState(false);
@@ -130,7 +130,7 @@ const handleSubmit = async (e) => {
       });
     }
     setShowSuccessAlert(true);
-    setFormData({ name: '', mobile: '', email: '', source:'satyammetroshowstoppers.in' });
+    setFormData({ name: '', mobile: '', email: '', source:'godrejkhargar.com' });
     // Notify parent that form was submitted
     setTimeout(() => {
       onClose(true);

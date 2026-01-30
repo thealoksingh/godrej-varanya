@@ -12,9 +12,9 @@
 
 ### 1. Google Search Console Setup
 - Visit: https://search.google.com/search-console
-- Add property: satyammetroshowstoppers.in
+- Add property: godrejkhargar.com
 - Verify using HTML file method
-- Submit sitemap: https://satyammetroshowstoppers.in/sitemap.xml
+- Submit sitemap: https://godrejkhargar.com/sitemap.xml
 - Monitor performance weekly
 
 ### 2. Bing Webmaster Tools

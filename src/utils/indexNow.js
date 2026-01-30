@@ -1,6 +1,6 @@
 // IndexNow utility for instant search engine indexing
 const INDEXNOW_KEY = '758d177aa28449c3bff244fbf4ccd39f';
-const HOST = 'satyammetroshowstoppers.in';
+const HOST = 'godrejkhargar.com';
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_KEY}.txt`;
 
 export const submitToIndexNow = async (urls) => {

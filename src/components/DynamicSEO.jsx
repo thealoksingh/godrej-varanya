@@ -64,7 +64,7 @@ const DynamicSEO = () => {
     // Update canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
     if (canonical) {
-      canonical.setAttribute('href', `https://satyammetroshowstoppers.in${location.pathname}`);
+      canonical.setAttribute('href', `https://godrejkhargar.com${location.pathname}`);
     }
     
     // Update Open Graph title
@@ -82,7 +82,7 @@ const DynamicSEO = () => {
     // Update Open Graph URL
     let ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) {
-      ogUrl.setAttribute('content', `https://satyammetroshowstoppers.in${location.pathname}`);
+      ogUrl.setAttribute('content', `https://godrejkhargar.com${location.pathname}`);
     }
     
     // Update Twitter title
@@ -97,7 +97,7 @@ const DynamicSEO = () => {
       twitterDescription.setAttribute('content', currentSEO.description);
     }
     // Submit current URL to IndexNow for instant indexing
-    const currentUrl = `https://satyammetroshowstoppers.in${location.pathname}`;
+    const currentUrl = `https://godrejkhargar.com${location.pathname}`;
     submitToIndexNow([currentUrl]);
     
   }, [location.pathname]);

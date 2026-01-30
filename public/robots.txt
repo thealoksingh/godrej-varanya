@@ -10,7 +10,7 @@ Allow: /location
 Allow: /gallery
 
 # Sitemap location
-Sitemap: https://satyammetroshowstoppers.in/sitemap.xml
+Sitemap: https://godrejkhargar.com/sitemap.xml
 
 # Crawl optimization
 Crawl-delay: 0.5

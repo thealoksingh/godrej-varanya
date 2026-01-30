@@ -7,16 +7,19 @@ import {
   messageTemplates,
 } from "../key/messageUtils";
 import axios from "axios";
-import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
-import calendarIcon from "../assets/Calendar.gif";
-import callUsIcon from "../assets/callus.gif";
-import whatsappAnimIcon from "../assets/whatsappAnim.gif";
+import calendarIcon from "../assets/gifs/Calendar.gif";
+import callUsIcon from "../assets/gifs/callus.gif";
+import whatsappAnimIcon from "../assets/gifs/whatsappAnim.gif";
+import freeSiteGif from "../assets/gifs/Free Site Visit.gif";
+import istantCallGif from "../assets/gifs/Instant Call Back.gif";
+import bestPriceGif from "../assets/gifs/Best Price.gif";
+
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
-    source: "satyammetroshowstoppers.in",
+    source: "godrejkhargar.com",
   });
   const [consentChecked, setConsentChecked] = useState(false);
 
@@ -121,7 +124,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
         name: "",
         mobile: "",
         email: "",
-        source: "satyammetroshowstoppers.in",
+        source: "godrejkhargar.com",
       });
     } else {
       setShowFailureAlert(true);
@@ -266,6 +269,32 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             </div>
           </div>
         </form>
+        <div className="h-24 flex flex-row mt-4 overflow-hidden">
+          <div className="w-1/3 flex flex-col items-center justify-center">
+            <img
+              src={freeSiteGif}
+              alt="Free Site Visit"
+              className="w-12 h-12"
+            />
+            <p className="text-center text-xs mt-2 text-gray-700 font-medium">Free Site Visit</p>
+          </div>
+          <div className="w-1/3 flex flex-col items-center justify-center">
+            <img
+              src={istantCallGif}
+              alt="Instant Call Back"
+              className="w-10 h-10"
+            />
+            <p className="text-center text-xs mt-4 text-gray-700 font-medium">Instant Call Back</p>
+          </div>
+          <div className="w-1/3 flex flex-col items-center justify-center">
+            <img
+              src={bestPriceGif}
+              alt="Best Price Guarantee"
+              className="w-12 h-12"
+            />
+            <p className="text-center text-xs mt-2 text-gray-700 font-medium">Best Price</p>
+          </div>
+        </div>
       </div>
       <div className="mt-auto p-6 ">
         <a
@@ -290,11 +319,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           className="right-0 bottom-0 flex justify-center items-center group"
         >
           <div className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-lg hover:shadow-xl">
-            <img
-              src={whatsappAnimIcon}
-              alt="WhatsApp"
-              className="w-12 h-12"
-            />
+            <img src={whatsappAnimIcon} alt="WhatsApp" className="w-12 h-12" />
           </div>
         </a>
       </div>

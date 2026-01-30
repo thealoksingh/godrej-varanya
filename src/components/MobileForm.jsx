@@ -9,7 +9,7 @@ const MobileForm = () => {
     name: "",
     email: "",
     mobile: "",
-    source: "satyammetroshowstoppers.in",
+    source: "godrejkhargar.com",
   });
 
   const [loading, setLoading] = useState(false);
@@ -103,7 +103,7 @@ const MobileForm = () => {
         });
       }
       setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "", source: "satyammetroshowstoppers.in" });
+      setFormData({ name: "", mobile: "", email: "", source: "godrejkhargar.com" });
     } else {
       setShowFailureAlert(true);
     }
