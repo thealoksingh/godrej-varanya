@@ -2,16 +2,23 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import { contactConfig } from "../config/credential";
-import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
+import {
+  createMessageWithAddress,
+  messageTemplates,
+} from "../key/messageUtils";
 import axios from "axios";
 import poster from "../assets/Poster/ShowStopper_Poster_2.jpeg";
+import calendarIcon from "../assets/Calendar.gif";
+import callUsIcon from "../assets/callus.gif";
+import whatsappAnimIcon from "../assets/whatsappAnim.gif";
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     mobile: "",
-    source:'satyammetroshowstoppers.in',
+    source: "satyammetroshowstoppers.in",
   });
+  const [consentChecked, setConsentChecked] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -44,23 +51,29 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     setShowSuccessAlert(false);
     setShowFailureAlert(false);
 
-    if (!validateForm(formData)) {
+    if (!validateForm(formData) || !consentChecked) {
       return;
     }
 
     setLoading(true);
     let backendSuccess = false;
     let emailSuccess = false;
-    
+
     // Create messages with address
-    const backendMessage = createMessageWithAddress(messageTemplates.general, formData.name);
-    const emailMessage = createMessageWithAddress(messageTemplates.general, formData.name);
-    
+    const backendMessage = createMessageWithAddress(
+      messageTemplates.general,
+      formData.name,
+    );
+    const emailMessage = createMessageWithAddress(
+      messageTemplates.general,
+      formData.name,
+    );
+
     // 1️⃣ Submit to backend
     try {
       const response = await axios.post(`${baseurl}/forms/submit`, {
         ...formData,
-        message: backendMessage
+        message: backendMessage,
       });
       if (response.status === 201 || response.status === 200) {
         backendSuccess = true;
@@ -93,18 +106,23 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     // 3️⃣ Show result
     if (backendSuccess || emailSuccess) {
       // Track conversion with gtag
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-          'value': 1.0,
-          'currency': 'INR',
-          'event_callback': function() {
-            console.log('Right form conversion tracked');
-          }
+      if (typeof gtag !== "undefined") {
+        gtag("event", "conversion", {
+          send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+          value: 1.0,
+          currency: "INR",
+          event_callback: function () {
+            console.log("Right form conversion tracked");
+          },
         });
       }
       setShowSuccessAlert(true);
-      setFormData({ name: "", mobile: "", email: "", source: 'satyammetroshowstoppers.in' });
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        source: "satyammetroshowstoppers.in",
+      });
     } else {
       setShowFailureAlert(true);
     }
@@ -113,27 +131,38 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   };
 
   return (
-    <div className="hidden lg:flex max-w-md mx-auto bg-white min-h-screen flex-col shadow-lg border border-[#9e7242] sticky top-0">
+    <div className=" lg:flex max-w-md mx-auto bg-white min-h-screen flex-col shadow-lg border border-[#9e7242] sticky top-0">
       {/* Header */}
       <div className=" flex flex-col items-center">
         <div
           onClick={onRequestCallBack}
-          className="animated-gradient  text-white w-full py-1 rounded-b-3xl text-center text-lg cursor-pointer shadow-md"
+          className="bg-black flex flex-row text-white w-full py-1  text-center text-lg cursor-pointer shadow-md"
         >
-          {contactConfig.displayPhone}
+          <div className="flex-1 py-2 border-r border-white text-center flex items-center justify-center gap-2">
+            <img
+              src={calendarIcon}
+              alt="Schedule"
+              className="w-6 h-6 brightness-0 invert"
+            />
+            <p className="font-semibold text-sm">Schedule Visit</p>
+          </div>
+          <div className="flex-1 py-2 text-center flex items-center justify-center gap-2">
+            <img
+              src={callUsIcon}
+              alt="Call"
+              className="w-6 h-6 brightness-0 invert"
+            />
+            <p className="font-semibold text-sm">
+              {" "}
+              {contactConfig.displayPhone}
+            </p>
+          </div>
         </div>
-
-        <button
-          onClick={onRequestCallBack}
-          className="mt-1 mb-2 animated-gradient  text-white px-10 py-1 rounded-lg text-lg shadow-inner hover:bg-[#8e693c]"
-        >
-          Request Call Back
-        </button>
       </div>
 
       {/* Form Section */}
       <div className="px-2 py-4 flex flex-col">
-        <h2 className="text-center text-black text-md mb-2">
+        <h2 className="text-center font-semibold text-black text-md mb-2">
           Pre-Register here for Best Offers
         </h2>
 
@@ -150,17 +179,17 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
         )}
 
         <form className="" onSubmit={handleSubmit}>
-          <div className="border border-[#9e7242] rounded-lg bg-[#e2ab7116] space-y-4 p-4 embossed-shadow">
+          <div className=" space-y-2 ">
             <div>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Enter Your Name Here.."
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
                 required
-                className="w-full border border-[#9e7242] rounded-lg p-2 bg-white outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs mt-1">{errors.name}</p>
@@ -175,7 +204,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full border border-[#9e7242]  bg-white rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mt-1">{errors.email}</p>
@@ -185,67 +214,89 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             <div>
               <input
                 type="tel"
-                placeholder="Mobile"
+                placeholder="Phone Number"
                 value={formData.mobile}
                 onChange={(e) =>
                   setFormData({ ...formData, mobile: e.target.value })
                 }
                 required
-                className="w-full border border-[#9e7242]  bg-white rounded-lg p-2 outline-none focus:ring-1 focus:ring-[#A67C48]"
+                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
               )}
             </div>
-
+            <div className="flex items-start gap-2 text-xs text-gray-600">
+              <input
+                type="checkbox"
+                id="consent"
+                checked={consentChecked}
+                onChange={(e) => setConsentChecked(e.target.checked)}
+                className="mt-1 accent-[var(--clr-p)]"
+                required
+              />
+              <label htmlFor="consent" className="text-[10px] leading-tight">
+                I consent to the processing of provided data according to{" "}
+                <a
+                  href="#"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Privacy Policy
+                </a>{" "}
+                |{" "}
+                <a
+                  href="#"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Terms & Conditions
+                </a>
+                . I authorize Prop Solutions 4 U Pvt. Ltd. and its
+                representatives to call, SMS, email or WhatsApp me about its
+                products and offers.
+              </label>
+            </div>
             <div className="flex justify-center pt-2">
               <button
                 type="submit"
-                disabled={loading}
-                className="animated-gradient text-white px-6 py-2.5 rounded-full text-sm shadow-md hover:opacity-90"
+                disabled={loading || !consentChecked}
+                className="animated-gradient animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90"
               >
-                {loading ? "Submitting..." : "Submit"}
+                {loading ? "Submitting..." : "Pre-Register Now"}
               </button>
-            </div>
-            <div className="mt-auto p-6 ">
-              <a
-                href={`https://wa.me/${
-                  contactConfig.phoneNumber
-                }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  // Track WhatsApp click with gtag
-                  if (typeof gtag !== 'undefined') {
-                    gtag('event', 'conversion', {
-                      'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-                      'value': 1.0,
-                      'currency': 'INR',
-                      'event_callback': function() {
-                        console.log('WhatsApp contact conversion tracked');
-                      }
-                    });
-                  }
-                }}
-                className="flex items-center gap-3  bg-white hover:bg-gray-200 border border-[#9e7242] rounded-lg px-4 py-3 shadow-md hover:shadow-lg transition-all duration-200 group"
-              >
-                <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                  alt="WhatsApp"
-                  className="w-5 h-5 group-hover:scale-110 transition-transform duration-200"
-                />
-                <span className="text-gray-700 font-medium text-sm">
-                  Get Instant Response
-                </span>
-              </a>
             </div>
           </div>
         </form>
-        <img
-          src={poster}
-          alt="Satyam Metro Showstopper Logo"
-          className="h-48 w-full mt-4 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
-        />
+      </div>
+      <div className="mt-auto p-6 ">
+        <a
+          href={`https://wa.me/${
+            contactConfig.phoneNumber
+          }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            // Track WhatsApp click with gtag
+            if (typeof gtag !== "undefined") {
+              gtag("event", "conversion", {
+                send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+                value: 1.0,
+                currency: "INR",
+                event_callback: function () {
+                  console.log("WhatsApp contact conversion tracked");
+                },
+              });
+            }
+          }}
+          className="right-0 bottom-0 flex justify-center items-center group"
+        >
+          <div className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-200 shadow-lg hover:shadow-xl">
+            <img
+              src={whatsappAnimIcon}
+              alt="WhatsApp"
+              className="w-12 h-12"
+            />
+          </div>
+        </a>
       </div>
     </div>
   );

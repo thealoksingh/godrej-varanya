@@ -67,7 +67,7 @@ function App() {
         {/* 🌐 Public Pages */}
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<HomePage />} />
+          <Route path="/highlight" element={<HomePage />} />
           <Route path="/price" element={<HomePage />} />
           <Route path="/amenities" element={<HomePage />} />
           <Route path="/floorplan" element={<HomePage />} />

@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-    --clr-p: #9e7242;
-    --clr-s: #f09051;
+    --clr-p: #6b8d14;
+    --clr-s: #a3d22d;
+    --sec:#b1175a;
 }
+.Godrej-Green {--Primary-color:#6b8d14; --Secondary-color:#b1175a; --button-color:#6b8d14; --button-hover-color:#485f0d; --button-text-color:#fff; --button-text-hover-color:#fff; --font-family:"Outfit";}
 
 .animated-gradient {
     background: linear-gradient(-35deg, var(--clr-s), var(--clr-p), var(--clr-s));
@@ -12,6 +14,31 @@
     border: 0px;
     box-shadow: 1px 2px 4px -2px rgba(0, 0, 0, 0.35);
 }
+.animated-gradient-secondary {
+  background: linear-gradient(
+    180deg,
+    var(--sec),
+    var(--clr-s),
+    var(--sec)
+  );
+  background-size: 100% 200%;
+  animation: gradient-vertical 3s ease-in-out infinite;
+  border: 0;
+  box-shadow: 1px 2px 4px -2px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes gradient-vertical {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+
 
 @keyframes gradient {
     0% {
@@ -44,4 +71,23 @@
 
 .embossed-shadow {
     box-shadow: inset 2px 2px 5px rgba(158, 114, 66, 0.2), inset -2px -2px 5px rgba(240, 144, 81, 0.1);
+}
+.animated-border {
+  position: relative;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  animation: border-rotate 2s linear infinite;
+}
+
+.animated-border.animated-gradient {
+  outline: 2px solid #ffd700;
+  animation: gradient 3s ease infinite, border-rotate 2s linear infinite;
+}
+
+@keyframes border-rotate {
+  0% { outline-color: #7c7a69; }
+  25% { outline-color: #ffed4e; }
+  50% { outline-color: #767259; }
+  75% { outline-color: #ffed4e; }
+  100% { outline-color: #635a28; }
 }

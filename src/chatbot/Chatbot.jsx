@@ -2,30 +2,27 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
+import shitalIcon from "../assets/shital.gif";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";
 
 const randomBot = [
   {
-    name: "Alok Singh",
-    image:
-      "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVufGVufDB8fDB8fHww",
-  },
-  {
-    name: "Ravi Kumar",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVufGVufDB8fDB8fHww",
-  },
-  {
     name: "Neha Agarwal",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
+    image: shitalIcon,
   },
   {
     name: "Priya Sharma",
-    image:
-      "https://images.unsplash.com/photo-1586351012965-861624544334?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Z2lybHxlbnwwfHwwfHx8MA%3D%3D",
+    image: shitalIcon,
+  },
+  {
+    name: "Madavi Joshi",
+    image: shitalIcon,
+  },
+  {
+    name: "Neelam Patil",
+    image: shitalIcon,
   },
 ];
 
@@ -47,6 +44,7 @@ export default function ChatBot({ open = true, setOpen }) {
   const [isLoading, setIsLoading] = useState(false);
   const [autoSubmitTimer, setAutoSubmitTimer] = useState(null);
   const [submissionSuccess, setSubmissionSuccess] = useState(null);
+  const [showBubble, setShowBubble] = useState(true);
   const messagesEndRef = useRef(null);
 
   // Scroll to bottom when messages update
@@ -58,7 +56,7 @@ export default function ChatBot({ open = true, setOpen }) {
   useEffect(() => {
     if (open && messages.length === 0) {
       addBotMessage(
-        `Hey! 👋 I'm ${currentBot.name} from Satyam Developers. How can I help you understand this amazing project?`,
+        `Hey! 👋 I'm ${currentBot.name} from Godrej Varanya. How can I help you understand this amazing project?`,
       );
       setConversationStep("interest");
     }
@@ -180,7 +178,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
         mobile: data.phone,
         email: data.email || "",
         message: finalMessage,
-        source: "satyammetroshowstoppers.in",
+        source: "godrejkhargar.com",
       });
       if (response.status === 201) {
         backendSuccess = true;
@@ -214,19 +212,19 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
     // 3️⃣ Show result
     if (backendSuccess || emailSuccess) {
       // Track conversion with gtag
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'conversion', {
-          'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
-          'value': 1.0,
-          'currency': 'INR',
-          'event_callback': function() {
-            console.log('Chatbot form conversion tracked');
-          }
+      if (typeof gtag !== "undefined") {
+        gtag("event", "conversion", {
+          send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+          value: 1.0,
+          currency: "INR",
+          event_callback: function () {
+            console.log("Chatbot form conversion tracked");
+          },
         });
       }
       setSubmissionSuccess(true);
       await simulateBotTyping(
-        `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Satyam Developers! 🎉`,
+        `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Godrej Varanya! 🎉`,
         1000,
       );
     } else {
@@ -285,7 +283,8 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
             <div
               className="p-4 text-white flex items-center gap-3 shrink-0"
               style={{
-                background: "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
+                background:
+                  "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
               }}
             >
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 overflow-hidden">
@@ -298,7 +297,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-sm">{currentBot.name}</h3>
-                <p className="text-xs opacity-90">Satyam Developers</p>
+                <p className="text-xs opacity-90">Godrej Varanya</p>
               </div>
               <button
                 className="p-1 hover:bg-white/20 rounded-full transition"
@@ -345,7 +344,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
                           className="p-3 text-white"
                           style={{
                             background:
-                              "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
+                              "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
                             borderRadius: "12px 12px 0px 12px",
                           }}
                         >
@@ -381,21 +380,21 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
                         className="w-2 h-2 rounded-full"
                         style={{
                           animation: "pulse 1.4s infinite",
-                          background: "#9e7242",
+                          background: "var(--clr-p)",
                         }}
                       ></div>
                       <div
                         className="w-2 h-2 rounded-full"
                         style={{
                           animation: "pulse 1.4s infinite 0.2s",
-                          background: "#9e7242",
+                          background: "var(--clr-s)",
                         }}
                       ></div>
                       <div
                         className="w-2 h-2 rounded-full"
                         style={{
                           animation: "pulse 1.4s infinite 0.4s",
-                          background: "#9e7242",
+                          background: "var(--clr-p)",
                         }}
                       ></div>
                     </div>
@@ -414,7 +413,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
                     className="p-3 text-white"
                     style={{
                       background:
-                        "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
+                        "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
                       borderRadius: "12px 12px 0px 12px",
                     }}
                   >
@@ -443,7 +442,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
                     className="p-3 text-white"
                     style={{
                       background:
-                        "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
+                        "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
                       borderRadius: "12px 12px 0px 12px",
                     }}
                   >
@@ -505,7 +504,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
                     className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg transition disabled:opacity-50"
                     style={{
                       background:
-                        "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
+                        "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
                     }}
                   >
                     <FiSend size={18} />
@@ -544,15 +543,53 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
 
       {/* Floating Button */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed lg:bottom-6 bottom-20 right-6 z-50 w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-white font-bold text-xl transition hover:scale-110"
-          style={{
-            background: "linear-gradient(135deg, #9e7242 0%, #f09051 100%)",
-          }}
-        >
-          <FiMessageCircle size={24} />
-        </button>
+        <>
+          {/* Animated Chat Bubble */}
+          {showBubble && (
+            <div className="fixed lg:bottom-24 bottom-38 right-10 z-40 max-w-xs ">
+              <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105">
+                <button
+                  onClick={() => setShowBubble(false)}
+                  className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 rounded-full flex items-center justify-center text-white hover:bg-red-600 transition-colors"
+                >
+                  <FiX size={14} />
+                </button>
+                <div className="space-y-1">
+                  <p className="font-semibold text-sm">
+                    👋 Hey! I'm {currentBot.name}
+                  </p>
+                  <p className="text-xs opacity-90">
+                    Need help with Godrej Varanya?
+                  </p>
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="text-xs font-medium bg-white/20 rounded-full px-3 py-1 inline-block mt-2"
+                  >
+                    💬 Let's Chat!
+                  </button>
+                </div>
+                {/* Speech bubble tail */}
+                <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-purple-600"></div>
+              </div>
+            </div>
+          )}
+
+          {/* Enhanced Bot Avatar Button */}
+          <button
+            onClick={() => setOpen(true)}
+            className="fixed lg:bottom-6 bottom-20 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-3xl  border-4 border-white bg-gradient-to-br from-pink-400 to-purple-500"
+          >
+            <img
+              src={shitalIcon}
+              alt="Chat with Neha"
+              className="w-12 h-12 object-cover rounded-full"
+            />
+            {/* Online indicator */}
+            <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-white animate-ping ">
+              <div className="w-2 h-2 bg-green-300 rounded-full mx-auto mt-0.5 animate-pulse "></div>
+            </div>
+          </button>
+        </>
       )}
 
       <style

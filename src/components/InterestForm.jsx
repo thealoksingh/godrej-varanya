@@ -4,7 +4,7 @@ import emailjs from '@emailjs/browser';
 import { credentials, emailKeys, regexPatterns, baseurl } from '../key/key';
 import { createMessageWithAddress, messageTemplates } from '../key/messageUtils';
 import axios from 'axios';
-import logo from "../assets/showstopper-logo.webp";
+import logo from "../assets/godrejLogo.png";
 
 const InterestForm = ({ onClose, mode }) => {
   const [formData, setFormData] = useState({
@@ -192,7 +192,7 @@ const handleSubmit = async (e) => {
            <img
               src={logo}
               alt="Satyam Metro Showstopper Logo"
-              className="h-15 w-46 mb-4 border-2 border-[#A67C48] p-1 bg-black rounded-sm hover:scale-105 transition-transform duration-200"
+              className="h-15 w-46 mb-4  p-1  hover:scale-105 transition-transform duration-200"
             />
 
           <p className="text-gray-700 font-medium mb-6 text-center">

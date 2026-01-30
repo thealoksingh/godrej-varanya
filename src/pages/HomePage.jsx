@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import About from "../components/About";
+import Highlight from "../components/Highlight";
 import Hero from "../components/Hero";
 import Price from "../components/Price";
 import Amenities from "../components/Amenities";
@@ -90,7 +90,7 @@ const HomePage = () => {
         <InterestForm mode={formMode} onClose={handleInterestFormClose} />
       )}
         <MobileForm />
-        <About />
+        <Highlight />
 
         <Price onOfferPriceClick={(type) => {setIsOfferPriceFormOpen(true)
           setOfferType(type);

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import oneCrestPoster from "../assets/Poster/one-crest-project-poster.jpeg";
 
-const About = () => {
+const Highlight = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [posterHeight, setPosterHeight] = useState(0);
   const posterRef = useRef(null);
@@ -15,7 +15,7 @@ const About = () => {
 
   return (
     <section
-      id="about"
+      id="highlight"
       className="max-w-7xl mx-auto px-6 py-4 bg-white scroll-mt-20"
     >
       <h2 className="text-3xl font-semibold text-[#A67C48] text-center mb-10">
@@ -120,4 +120,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Highlight;
