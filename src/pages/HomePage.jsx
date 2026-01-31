@@ -16,6 +16,8 @@ import OfferPriceForm from "../components/OfferPriceForm";
 import DynamicSEO from "../components/DynamicSEO";
 import AboutPage from "./AboutPage";
 import HighlightPage from "./HighlightPage";
+import AmenitiesPage from "./AmenitiesPage";
+import GalleryPage from "./GalleryPage";
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds
@@ -95,14 +97,25 @@ const HomePage = () => {
         <MobileForm />
         <AboutPage />
         <HighlightPage />
+        <Price
+          onOfferPriceClick={(type) => {
+            setIsOfferPriceFormOpen(true);
+            setOfferType(type);
+          }}
+        />
+        <FloorPlan
+          onOfferPriceClick={(type) => {
+            setIsOfferPriceFormOpen(true);
+            setOfferType(type);
+          }}
+        />
+        
+      <AmenitiesPage />
+        <div id="gallery">
+        <GalleryPage />
+      </div>
       </div>
 
-      <Price
-        onOfferPriceClick={(type) => {
-          setIsOfferPriceFormOpen(true);
-          setOfferType(type);
-        }}
-      />
       {isOfferPriceFormOpen && (
         <OfferPriceForm
           type={offerType}
@@ -110,16 +123,8 @@ const HomePage = () => {
         />
       )}
 
-      <Amenities />
-      <div id="gallery">
-        <Gallery />
-      </div>
-      <FloorPlan
-        onOfferPriceClick={(type) => {
-          setIsOfferPriceFormOpen(true);
-          setOfferType(type);
-        }}
-      />
+    
+
       <Location />
       <NRIServices />
       <Footer />

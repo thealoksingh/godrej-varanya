@@ -1,67 +1,75 @@
 import React, { useEffect } from "react";
 import oneCrestPriceSheet from "../assets/Prices/one-crest-price-detail-sheet.jpg";
-import { createProductSchema, pushSchemaToGTM } from '../utils/schemaUtils';
+import { createProductSchema, pushSchemaToGTM } from "../utils/schemaUtils";
+import Divider from "./Divider";
 
 const Price = ({ onOfferPriceClick }) => {
   const priceData = [
-    { type: "2 BHK", area: "950 sq. ft.", price: "Starting from ₹2.46 Cr" },
-    { type: "3 BHK Luxe", area: "1474 sq. ft.", price: "Starting from ₹3.77 Cr" },
-    { type: "3 BHK Couture", area: "1567 sq. ft.", price: "Starting from ₹4.00 Cr" },
-    { type: "4 BHK Atelier", area: "2320 sq. ft.", price: "Starting from ₹5.95 Cr" },
-    { type: "2 + 2 BHK", area: "1909 sq. ft.", price: "Starting from ₹4.94 Cr" },
+    {
+      type: "2 BHK",
+      area: "725 - 775 Sq. Ft.",
+      price: "₹ 2.25 Cr* - 2.39 Cr*",
+    },
+    {
+      type: "3 BHK",
+      area: "1100 - 1200 Sq. Ft.",
+      price: "₹ 3.99 Cr* - 4.39 Cr*",
+    },
   ];
 
   useEffect(() => {
     // Push product schema to GTM dataLayer
     const productSchema = createProductSchema(priceData);
-    pushSchemaToGTM(productSchema, 'price_page_view');
+    pushSchemaToGTM(productSchema, "price_page_view");
   }, []);
 
   return (
     <section
       id="price"
-      className="bg-white py-4 px-4 lg:px-6 max-w-7xl mx-auto"
+      className="bg-white py-4 px-4 lg:px-6 max-w-7xl mx-auto mt-4"
     >
       {/* Page Title */}
-      <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 text-center mb-8 lg:mb-12">
-        Satyam Metro Showstopper Price & Plan
+       <h2 className="lg:text-3xl text-2xl font-semibold text-[var(--clr-p)] text-center mb-4 ">
+        Godrej Varanya - Area & Pricing
       </h2>
+      <Divider />
+   
 
-      <div className="flex flex-col lg:flex-row gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-8 items-start mt-4">
         {/* --- PRICING SECTION --- */}
         <div className="grow w-full">
           {/* Desktop Table: Hidden on Mobile, Visible on LG+ */}
-          <div className="hidden lg:block border border-orange-200 rounded-sm overflow-hidden">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-orange-300">
-                  <th className="p-4 text-xl text-slate-900">Type</th>
-                  <th className="p-4 text-xl text-slate-900">Carpet Area</th>
-                  <th className="p-4 text-xl text-slate-900">Price</th>
-                  <th className="p-4"></th>
+          <div className="hidden lg:block border border-[var(--clr-p)] rounded-[32px] overflow-hidden">
+            <table className="w-full text-left border-collapse ">
+              <thead className="bg-[var(--clr-p)]">
+                <tr className="border-b  border-[var(--clr-p)] text-white ">
+                  <th className="pl-8 py-3 ">Type</th>
+                  <th className="pl-8 py-3  ">Carpet Area</th>
+                  <th className="pl-8  py-3 ">Price</th>
+                  <th className="pl-8 py-3 "></th>
                 </tr>
               </thead>
               <tbody>
                 {priceData.map((item, index) => (
                   <tr
                     key={index}
-                    className={`border-b border-orange-100 last:border-0 ${
+                    className={`border-b border-[var(--clr-p)] last:border-0 ${
                       index % 2 === 1 ? "bg-slate-50/50" : ""
                     }`}
                   >
-                    <td className="p-4 text-lg font-medium text-slate-700">
+                    <td className="pl-8 py-3 font-medium text-slate-700">
                       {item.type}
                     </td>
-                    <td className="p-4 text-lg text-slate-600">{item.area}</td>
-                    <td className="p-4 text-lg font-bold text-slate-900">
+                    <td className="pl-8 py-3 text-slate-600">{item.area}</td>
+                    <td className="pl-8 py-3 font-bold text-slate-900">
                       {item.price}
                     </td>
                     <td className="p-4 text-right">
                       <button
-                        onClick={() => onOfferPriceClick('price-breakup')}
-                        className="bg-[#A67C48] text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-[#8e693c] transition-colors shadow-sm whitespace-nowrap cursor-pointer"
+                        onClick={() => onOfferPriceClick("price-breakup")}
+                        className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px] font-semibold text-xl transition-all active:scale-95 cursor-pointer mb-2"
                       >
-                        Price Breakup
+                        Complete Costing Detail
                       </button>
                     </td>
                   </tr>
@@ -71,30 +79,34 @@ const Price = ({ onOfferPriceClick }) => {
           </div>
 
           {/* Mobile Cards: Visible on Mobile, Hidden on LG+ */}
-          <div className="lg:hidden border border-orange-400 rounded-[30px] flex flex-col gap-2">
+          <div className="lg:hidden border border-[var(--clr-p)] rounded-[28px] border-3 flex flex-col gap-2">
             {priceData.map((item, index) => (
               <div
                 key={index}
                 className={` flex flex-col items-center text-center p-2`}
               >
                 {/* BHK Type */}
-                <h3 className="text-2xl  text-slate-800 mb-2">{item.type}</h3>
+                <h3 className="text-2xl  text-slate-800 font-semibold mb-1">
+                  {item.type}
+                </h3>
 
                 {/* Area */}
-                <p className="text-lg text-slate-600 mb-2">
+                <p className="text-lg text-slate-600 mb-1">
                   {item.area}{" "}
                   <span className="text-sm opacity-80">(Carpet Area)</span>
                 </p>
 
                 {/* Price */}
-                <p className="text-xl  text-slate-900 mb-2">{item.price}</p>
+                <p className="text-xl  text-slate-900 font-semibold mb-2">
+                  {item.price}
+                </p>
 
                 {/* Button */}
                 <button
-                  onClick={() => onOfferPriceClick('price-breakup')}
-                  className="bg-[#A67C48] text-white px-10 py-2 rounded-lg font-medium text-xl hover:bg-[#8e693c] transition-all active:scale-95 cursor-pointer mb-2"
+                  onClick={() => onOfferPriceClick("price-breakup")}
+                  className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px]  font-semibold text-xl transition-all active:scale-95 cursor-pointer mb-2"
                 >
-                  Price Breakup
+                  Complete Costing Detail
                 </button>
               </div>
             ))}
@@ -102,7 +114,7 @@ const Price = ({ onOfferPriceClick }) => {
         </div>
 
         {/* --- RIGHT PREVIEW SECTION --- */}
-        <div className="w-full lg:w-[320px] shrink-0 flex flex-col items-center">
+        {/* <div className="w-full lg:w-[320px] shrink-0 flex flex-col items-center">
           <div className="border border-orange-300 p-2 bg-white shadow-sm w-full">
             <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
               <img
@@ -124,7 +136,7 @@ const Price = ({ onOfferPriceClick }) => {
           >
             Complete Costing Details
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

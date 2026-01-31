@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import AboutImage from "../assets/about.png";
 import { Download } from "lucide-react";
+import Divider from "./Divider";
 const About = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [posterHeight, setPosterHeight] = useState(0);
@@ -21,6 +22,10 @@ const About = () => {
       <h2 className="lg:text-3xl text-2xl text-center lg:pl-6 lg:text-start font-semibold text-[var(--clr-p)] lg:mb-0 mb-4">
         About Godrej Varanya
       </h2>
+      <div className="block lg:hidden">
+        <Divider />
+      </div>
+
       <div className="  overflow-hidden flex flex-col-reverse lg:flex-row ">
         <div className="lg:w-[55%] w-full lg:p-6  text-justify ">
           <p className="text-sm">
