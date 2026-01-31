@@ -56,7 +56,7 @@ const Hero = ({ onRequestCallBack }) => {
         bg-white shadow-2xl rounded-2xl 
         max-w-4xl
         mx-auto
-        w-[90%] mx-auto mt-4
+        w-[90%] mx-auto mt-4 mb-4
         lg:absolute lg:top-6 lg:left-6 lg:mt-0 lg:max-w-sm lg:z-10 overflow-hidden
       "
         >

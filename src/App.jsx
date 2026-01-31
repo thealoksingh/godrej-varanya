@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
-
+import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import PrivacyPage from "./pages/PrivacyPage";
 import AdminPage from "./pages/AdminPage";
@@ -68,6 +68,7 @@ function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/highlight" element={<HomePage />} />
+           <Route path="/about" element={<AboutPage />} />
           <Route path="/price" element={<HomePage />} />
           <Route path="/amenities" element={<HomePage />} />
           <Route path="/floorplan" element={<HomePage />} />

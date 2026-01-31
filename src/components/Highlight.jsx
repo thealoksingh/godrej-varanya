@@ -16,7 +16,7 @@ const Highlight = () => {
   return (
     <section
       id="highlight"
-      className="max-w-7xl mx-auto px-6 py-4 bg-white scroll-mt-20"
+      className="max-w-7xl mx-auto px-6 py-4 bg-white scroll-mt-20 mt-4"
     >
       <h2 className="text-3xl font-semibold text-[#A67C48] text-center mb-10">
         Satyam Metro Showstopper

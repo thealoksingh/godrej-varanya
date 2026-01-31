@@ -17,6 +17,7 @@ import {
 import logo from "../assets/godrejLogo.png";
 import psImage from "../assets/psImage.png";
 
+
 const Header = ({ onBrochureClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,18 +25,19 @@ const Header = ({ onBrochureClick }) => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navLinks = [
-    // {
-    //   name: "Home",
-    //   section: "hero",
-    //   path: "/",
-    //   icon: <Home size={18} />,
-    // },
+   
     {
       name: "Highlights",
       section: "highlight",
       path: "/highlight",
       icon: <CircleCheckBig size={18} />,
     },
+    //  {
+    //   name: "About",
+    //   section: "about",
+    //   path: "/about",
+    //   icon: <Info size={18} />,
+    // },
     {
       name: "Pricing",
       section: "price",
