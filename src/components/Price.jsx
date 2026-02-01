@@ -26,7 +26,7 @@ const Price = ({ onOfferPriceClick }) => {
   return (
     <section
       id="price"
-      className="bg-white py-4 px-4 lg:px-6 max-w-7xl mx-auto mt-4"
+      className="bg-[#EFEBEB] mb-4 py-4 px-4 lg:px-6 max-w-7xl mx-auto mt-4"
     >
       {/* Page Title */}
        <h2 className="lg:text-3xl text-2xl font-semibold text-[var(--clr-p)] text-center mb-4 ">

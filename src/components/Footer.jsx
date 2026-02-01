@@ -1,46 +1,46 @@
-import React from 'react';
-
+import React from "react";
+import reraQr from "../assets/reraQrCode.png";
+import logo from "../assets/godrejLogo.png";
 const Footer = () => {
   return (
-    <footer className="w-full font-sans text-[#333]">
-      {/* Upper Section: RERA Link */}
-      <div className="py-2 text-center">
-        <h2 className="text-2xl mb-2">RERA Number</h2>
-        <p className="text-md">
-          This project is RERA registered –{' '}
-          <a 
-            href="https://maharera.maharashtra.gov.in" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-500 hover:underline"
-          >
-            maharera.maharashtra.gov.in
-          </a>
+    <footer className="w-full font-sans text-[#333] bg-cyan-200">
+      <div className="bg-[#EFEBEB] flex justify-center items-center p-6 flex-col">
+        <img
+          src={logo}
+          alt="godrej varanya logo"
+          className=" w-54  p-1  hover:scale-105 transition-transform duration-200"
+        />
+        <img
+          src={reraQr}
+          alt="godrej varanya logo"
+          className=" w-32  p-1 mt-4 hover:scale-105 transition-transform duration-200"
+        />
+        <p className="text-[11px]">This project is RERA registered. </p>
+        <p className="text-[14px]">Agent Rera Number : A51900029955</p>
+        <p className="text-[14px] font-semibold">Project Rera Number : PM1271012502176</p>
+        <p className="text-[10px] mt-4 text-justify">
+          The content presented on this website is solely for informational
+          purposes and does not constitute a service offer. Prices mentioned
+          here are subject to change without prior notification, and the
+          availability of the listed properties is not assured. Images showcased
+          are illustrative and may not precisely represent the actual
+          properties. Kindly be advised that this website operates as an
+          authorized marketing partner (PropSolutions4U Pvt. Ltd). For necessary
+          processing, we may share data with Real Estate Regulatory Authority
+          (RERA) registered brokers/companies. Additionally, updates and
+          information may be sent to the registered mobile number or email ID.
+          All rights reserved. This website's content, design, and data are
+          protected by copyright and other intellectual property rights.
+          Unauthorized use or reproduction of the content may be subject to
+          legal repercussions. For precise and current information on services,
+          pricing, availability, or any other details, we recommend you contact
+          us directly via the provided contact information on this website. We
+          appreciate your visit.
         </p>
+         <p className="text-[12px] text-gray-600">© Privacy Policy | Terms & Conditions</p>
       </div>
-
-      {/* Lower Section: Disclaimer */}
-      <div className="bg-[#eef6ff] px-6 py-10 md:px-20 mb-6">
-        <div className="max-w-6xl mx-auto text-center leading-relaxed text-xs lg:text-base">
-          <p className="mb-4">
-            <span className="font-bold">Disclaimer:</span> The content is for information purposes only and does not constitute an offer to avail of any service. Prices mentioned are subject to change without notice and properties mentioned are subject to availability. Images for representation purpose only. This is not the official website. Website maintained by Authorized Channel Partner Maha Rera. We may share data with rera registered brokers/companies for further procession.
-          </p>
-          
-          {/* Developer Info */}
-          <p className="mb-4 text-sm lg:text-base">
-            <span className="font-semibold">Satyam Metro Developers</span> - Premium real estate developer in Navi Mumbai. Previous successful project: <span className="font-semibold text-[#A67C48]">One Crest</span>, a landmark residential development showcasing our commitment to luxury and quality construction.
-          </p>
-          
-          {/* Links */}
-          <div className="flex justify-center space-x-2 text-blue-600 mb-4">
-            <a href="/privacy" className="hover:underline">Privacy Policy | Terms & Conditions</a>
-          </div>
-          
-          {/* Copyright */}
-          <div className="border-t border-gray-300 pt-4 text-xs lg:text-sm text-gray-600">
-            <p>&copy; 2026 Satyam Metro Developers. All rights reserved. | Showstopper Kharghar | One Crest Developer</p>
-          </div>
-        </div>
+      <div className="bg-black flex justify-center items-center h-10 rounded-b-lg text-white text-[12px]">
+        <p>All Rights Reserved. © 2025 PropSolutions4U Pvt. Ltd.</p>
       </div>
     </footer>
   );

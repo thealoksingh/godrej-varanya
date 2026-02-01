@@ -112,7 +112,7 @@ const Gallery = () => {
   const prevSlide = () => setCurrentIndex((prev) => prev - 1);
 
   return (
-    <section className="py-8 bg-white">
+    <section id="gallery" className="py-8 bg-white mt-4">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl lg:text-3xl font-semibold text-center text-[var(--clr-p)] mb-3">
           Godrej Varanya – Project Gallery

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import AboutImage from "../assets/about.png";
 import { Download } from "lucide-react";
 import Divider from "./Divider";
-const About = () => {
+const About = ({onRequestCallBack}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [posterHeight, setPosterHeight] = useState(0);
   const posterRef = useRef(null);
@@ -59,8 +59,8 @@ const About = () => {
           >
             {isExpanded ? "Read Less-" : "Read More+"}
           </span>
-          <div className="flex justify-center lg:justify-start p-4 lg:pl-0">
-            <button className="animated-gradient flex items-center gap-2  animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90">
+          <div   className="flex justify-center lg:justify-start p-4 lg:pl-0">
+            <button onClick={onRequestCallBack} className="animated-gradient flex items-center gap-2  animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90">
               <Download size={18} className="animate-bounce" /> Download
               Brochure
             </button>

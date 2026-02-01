@@ -2,7 +2,8 @@ import React from 'react';
 import SEO from '../components/SEO';
 import About from '../components/About';
 
-const AboutPage = () => {
+const AboutPage = ({onRequestCallBack}) => {
+  console.log("AboutPage onRequestCallBack:", onRequestCallBack); // Debug log
   return (
     <>
       <SEO 
@@ -11,7 +12,7 @@ const AboutPage = () => {
         keywords="Satyam Developers, Satyam Metro Developers, Rajesh Gulati, real estate Kharghar, property developer Navi Mumbai, Queens Necklace, residential projects"
         canonical="https://godrejkhargar.com/about"
       />
-      <About />
+      <About onRequestCallBack={onRequestCallBack}/>
     </>
   );
 };

@@ -4,7 +4,7 @@ import Price from "../components/Price";
 import Amenities from "../components/Amenities";
 import FloorPlan from "../components/FloorPlan";
 import Location from "../components/Location";
-import Gallery from "../components/GalleryPage";
+import Gallery from "../components/Gallery";
 import NRIServices from "../components/NRIServices";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -18,6 +18,8 @@ import AboutPage from "./AboutPage";
 import HighlightPage from "./HighlightPage";
 import AmenitiesPage from "./AmenitiesPage";
 import GalleryPage from "./GalleryPage";
+import ContactPage from "./ContactPage";
+import LowerAboutSection from "./LowerAboutSection";
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds
@@ -87,20 +89,25 @@ const HomePage = () => {
       <Hero
         onRequestCallBack={() => {
           setIsInterestFormOpen(true);
-          setFormMode("download brochure");
+          setFormMode("Get Detail About Varanya");
         }}
       />
       {isInterestFormOpen && (
         <InterestForm mode={formMode} onClose={handleInterestFormClose} />
       )}
-      <div className="lg:p-4 p-2 bg-gray-100">
+      <div className="lg:p-4 p-2 bg-[#E2E6E9]">
         <MobileForm />
-        <AboutPage />
+        <AboutPage
+          onRequestCallBack={() => {
+            setIsInterestFormOpen(true);
+            setFormMode("Download Brochure");
+          }}
+        />
         <HighlightPage />
         <Price
           onOfferPriceClick={(type) => {
             setIsOfferPriceFormOpen(true);
-            setOfferType(type);
+            setFormMode("Get More Detail About Poject");
           }}
         />
         <FloorPlan
@@ -109,11 +116,19 @@ const HomePage = () => {
             setOfferType(type);
           }}
         />
-        
-      <AmenitiesPage />
-        <div id="gallery">
+
+        <AmenitiesPage />
+
         <GalleryPage />
-      </div>
+        <Location
+          onRequestCallBack={() => {
+            setIsInterestFormOpen(true);
+            setFormMode("Get Location Detail");
+          }}
+        />
+        <ContactPage/>
+        <LowerAboutSection/>
+          <Footer />
       </div>
 
       {isOfferPriceFormOpen && (
@@ -122,12 +137,8 @@ const HomePage = () => {
           onClose={() => setIsOfferPriceFormOpen(false)}
         />
       )}
-
+      {/* <NRIServices /> */}
     
-
-      <Location />
-      <NRIServices />
-      <Footer />
       <MobileFooter />
     </>
   );

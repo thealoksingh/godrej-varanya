@@ -7,6 +7,9 @@ import {
   messageTemplates,
 } from "../key/messageUtils";
 import axios from "axios";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { User, Mail } from "lucide-react";
 import calendarIcon from "../assets/gifs/Calendar.gif";
 import callUsIcon from "../assets/gifs/callus.gif";
 import whatsappAnimIcon from "../assets/gifs/whatsappAnim.gif";
@@ -181,9 +184,11 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           </div>
         )}
 
-        <form className="" onSubmit={handleSubmit}>
+        <form className="overflow-visible" onSubmit={handleSubmit}>
           <div className=" space-y-2 ">
-            <div>
+            {/* Name Input with Icon */}
+            <div className="relative">
+              <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="text"
                 placeholder="Enter Your Name Here.."
@@ -192,14 +197,16 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 required
-                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
+                className="w-full pl-10 pr-3 py-2 border border-[var(--clr-p)] bg-white rounded-sm outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
               />
               {errors.name && (
                 <p className="text-red-500 text-xs mt-1">{errors.name}</p>
               )}
             </div>
 
-            <div>
+            {/* Email Input with Icon */}
+            <div className="relative">
+              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
               <input
                 type="email"
                 placeholder="Email (Optional)"
@@ -207,23 +214,34 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
+                className="w-full pl-10 pr-3 py-2 border border-[var(--clr-p)] bg-white rounded-sm outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
               />
               {errors.email && (
                 <p className="text-red-500 text-xs mt-1">{errors.email}</p>
               )}
             </div>
 
+            {/* Phone Input with react-phone-input-2 */}
             <div>
-              <input
-                type="tel"
-                placeholder="Phone Number"
+              <PhoneInput
+                country={'in'}
                 value={formData.mobile}
-                onChange={(e) =>
-                  setFormData({ ...formData, mobile: e.target.value })
-                }
-                required
-                className="w-full border border-[var(--clr-p)]  bg-white rounded-sm p-2 outline-none focus:ring-1 focus:ring-[var(--clr-s)]"
+                onChange={(phone) => setFormData({ ...formData, mobile: phone })}
+                inputStyle={{
+                  width: '100%',
+                  height: '40px',
+                  fontSize: '14px',
+                  border: '1px solid var(--clr-p)',
+                  borderRadius: '2px'
+                }}
+                buttonStyle={{
+                  border: '1px solid var(--clr-p)',
+                  borderRadius: '2px 0 0 2px',
+                  height: '40px'
+                }}
+                dropdownStyle={{
+                  zIndex: 9999
+                }}
               />
               {errors.mobile && (
                 <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>

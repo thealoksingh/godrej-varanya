@@ -49,7 +49,7 @@ const Amenities = () => {
   const secondSwiperAmenities = amenities.filter((_, i) => i % 2 !== 0);
 
   return (
-    <section id="amenities" className="bg-white py-4 px-5 mt-4">
+    <section id="amenities" className="bg-[#EFEBEB] py-4 px-5 mt-4">
       <div className="max-w-7xl mx-auto">
         <header className="text-center mb-10">
           <h2 className="lg:text-3xl text-2xl font-semibold text-[var(--clr-p)] text-center mb-4 ">
