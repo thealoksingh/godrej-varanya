@@ -17,7 +17,6 @@ import {
 import logo from "../assets/godrejLogo.png";
 import psImage from "../assets/psImage.png";
 
-
 const Header = ({ onBrochureClick }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ const Header = ({ onBrochureClick }) => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const navLinks = [
-   
     {
       name: "Highlights",
       section: "highlight",
@@ -96,18 +94,25 @@ const Header = ({ onBrochureClick }) => {
   }, [location.pathname]);
 
   const handleNavClick = (section, path) => {
-    setIsOpen(false);
-    setActiveSection(section);
-    navigate(path);
+    try {
+      setIsOpen(false);
+      setActiveSection(section);
+      navigate(path);
 
-    setTimeout(() => {
-      const element = document.getElementById(
-        section === "hero" ? "hero" : section,
-      );
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 100);
+      setTimeout(() => {
+        const element = document.getElementById(
+          section === "hero" ? "hero" : section,
+        );
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } catch (error) {
+      console.error("Navigation error:", error);
+      // Fallback navigation
+      setIsOpen(false);
+      navigate(path);
+    }
   };
 
   const isActive = (section) => {
@@ -122,7 +127,7 @@ const Header = ({ onBrochureClick }) => {
           <div onClick={() => handleNavClick("hero", "/")}>
             <img
               src={logo}
-              alt="Satyam Metro Showstopper Logo"
+              alt="godrej varanya Logo"
               className=" w-54  p-1  hover:scale-105 transition-transform duration-200"
             />
           </div>
@@ -161,7 +166,7 @@ const Header = ({ onBrochureClick }) => {
           </button>
           <img
             src={psImage}
-            alt="Satyam Metro Showstopper Logo"
+            alt="ps image"
             className=" w-12 h-12 p-1  hover:scale-105 transition-transform duration-200"
           />
         </div>

@@ -7,7 +7,7 @@ const DynamicSEO = () => {
   
   const seoData = {
     '/': {
-      title: 'Godrej Varanya Kharghar | New Launch Luxury Apartments Navi Mumbai | Best Property Investment 2025',
+      title: 'Godrej Varanya Kharghar | New Launch Luxury Apartments Navi Mumbai | Best Property Investment 2026',
       description: 'Discover Godrej Varanya - Premium 2 & 3 BHK luxury apartments in Kharghar, Navi Mumbai. New launch by Godrej Properties with world-class amenities. Best property investment opportunity.',
       keywords: 'Godrej Varanya, Godrej Properties Kharghar, new launch Kharghar, best property invest Navi Mumbai, luxury apartments Kharghar, Godrej project Kharghar'
     },

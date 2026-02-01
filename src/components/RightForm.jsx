@@ -263,8 +263,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Privacy Policy
-                </a>{" "}
-                |{" "}
+                </a>
                 <a
                   href="#"
                   className="text-blue-600 underline hover:text-blue-800"
@@ -292,7 +291,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             <img
               src={freeSiteGif}
               alt="Free Site Visit"
-              className="w-12 h-12"
+              className="w-13 h-13"
             />
             <p className="text-center text-xs mt-2 text-gray-700 font-medium">Free Site Visit</p>
           </div>

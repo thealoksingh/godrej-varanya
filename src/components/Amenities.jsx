@@ -15,32 +15,32 @@ const Amenities = () => {
     {
       title: "24x7 Security",
       img: security,
-      alt: "One Crest jogging track - Premium fitness amenities Satyam Metro Showstopper Kharghar",
+      alt: "",
     },
     {
       title: "gymnasium",
       img: gymnasium,
-      alt: "One Crest senior citizen area - Community spaces Satyam Metro Developers Navi Mumbai",
+      alt: "",
     },
     {
       title: "landscaped gardens",
       img: gardens,
-      alt: "One Crest indoor games room - Recreation facilities luxury apartments Kharghar",
+      alt: "",
     },
     {
       title: "swimming pool",
       img: swimmingpool,
-      alt: "One Crest swimming pool - Premium amenities Satyam Metro Showstopper Sector 20",
+      alt: "",
     },
     {
       title: "KIDS PLAY AREA",
       img: kidsPlayArea,
-      alt: "One Crest children play area - Family amenities luxury residential project Kharghar",
+      alt: "",
     },
     {
       title: "club house ",
       img: clubHouse,
-      alt: "One Crest outdoor gymnasium - Fitness facilities Satyam Metro Developers Navi Mumbai",
+      alt: "",
     },
 
   ];

@@ -28,7 +28,7 @@ const LowerAboutSection = ({ onRequestCallBack }) => {
           Delhi-NCR, Bengaluru, Pune, and Hyderabad. The company has received
           over 400 awards for its commitment to cutting-edge design, green
           building practices, and quality construction, and achieved record
-          pre-sales of over ₹29,444 crore in the financial year 2025,
+          pre-sales of over ₹29,444 crore in the financial year 2026,
           solidifying its market leadership.
         </p>
         <p className="text-justify text-[14px] mt-2">
