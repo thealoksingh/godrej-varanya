@@ -10,7 +10,7 @@ import MallShopping from "../assets/gifs/Mall.gif";
 import techpark from "../assets/gifs/tech.gif";
 import Recreation from "../assets/gifs/Hotel.gif";
 
-const Location = ({onRequestCallBack}) => {
+const Location = ({ onRequestCallBack }) => {
   const [selectedCategory, setSelectedCategory] = useState("Connectivity");
   const locationData = [
     {
@@ -95,7 +95,10 @@ const Location = ({onRequestCallBack}) => {
   ];
 
   return (
-    <section id="location" className="bg-[#EFEBEB] py-4 px-2 max-w-7xl mx-auto mt-4">
+    <section
+      id="location"
+      className="bg-[#EFEBEB] py-4 px-2 max-w-7xl mx-auto mt-4"
+    >
       {/* Header Section */}
       <div className="mb-1">
         <h2 className="text-2xl lg:text-3xl font-semibold text-center text-[var(--clr-p)] mb-3">
@@ -106,34 +109,58 @@ const Location = ({onRequestCallBack}) => {
       </div>
 
       {/* Map Section */}
-      <div className="w-full h-96 mt-6 rounded-lg overflow-hidden border border-gray-200 shadow-sm mb-6 relative">
+      <div className="relative w-full mb-4 h-[350px] lg:h-[500px] mt-8 rounded-2xl overflow-hidden shadow-lg transition-transform hover:scale-[1.01]">
+        {/* MAP */}
         <iframe
-          title="Godrej Varanya Location Kharghar Navi Mumbai"
-          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.234!2d${contactConfig.propertyLocation.longitude}!3d${contactConfig.propertyLocation.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzUwLjIiTiA3M8KwMDQnMjQuMSJF!5e0!3m2!1sen!2sin!4v1234567890`}
+          title="Godrej Varanya Location"
+          src={`https://maps.google.com/maps?q=${contactConfig.propertyLocation.latitude},${contactConfig.propertyLocation.longitude}&z=15&output=embed`}
           className="w-full h-full border-0"
-          allowFullScreen=""
           loading="lazy"
-        ></iframe>
+        />
 
-        {/* Custom Marker Overlay */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full pointer-events-none z-10">
-          <div className="relative">
-            <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent pointer-events-none"></div>
+
+        {/* Decorative Marker */}
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${contactConfig.propertyLocation.latitude},${contactConfig.propertyLocation.longitude}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full z-10"
+        >
+          <div className="relative flex items-center justify-center cursor-pointer">
+            <span className="absolute w-20 h-20 rounded-full bg-[var(--clr-p)]/30 animate-ping"></span>
+
+            <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[var(--clr-p)] shadow-xl">
               <img
                 src={godrejVaranyaTopSwimmingPool}
-                alt="Godrej Varanya project location marker - Premium luxury apartments Kharghar Navi Mumbai"
+                alt="Godrej Varanya"
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[#A67C48]"></div>
           </div>
+        </a>
+
+        {/* Location Card */}
+        <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-4 z-20">
+          <p className="font-semibold text-lg">Godrej Varanya</p>
+
+          <p className="text-sm text-gray-600">Kharghar, Navi Mumbai</p>
+
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${contactConfig.propertyLocation.latitude},${contactConfig.propertyLocation.longitude}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-2 text-sm font-semibold text-[var(--clr-p)] hover:underline"
+          >
+            Get Directions →
+          </a>
         </div>
       </div>
 
       {/* Category Tabs */}
       <div className="">
-       <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-2">
-
+        <div className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-2">
           {locationData.map((data) => (
             <div
               key={data.category}
@@ -171,20 +198,22 @@ const Location = ({onRequestCallBack}) => {
                       key={itemIndex}
                       className="flex items-start gap-3 text-sm"
                     >
-                        <MapPin size={18}/>
-                       <span>{item}</span>
+                      <MapPin size={18} />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             ))}
         </div>
-        <div   className="flex justify-center p-4">
-            <button onClick={onRequestCallBack} className="animated-gradient flex items-center gap-2  animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90">
-            
-              Request Location Detail
-            </button>
-          </div>
+        <div className="flex justify-center p-4">
+          <button
+            onClick={onRequestCallBack}
+            className="animated-gradient flex items-center gap-2  animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90"
+          >
+            Request Location Detail
+          </button>
+        </div>
       </div>
     </section>
   );
