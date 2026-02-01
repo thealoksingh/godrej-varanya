@@ -12,7 +12,7 @@ export const emailKeys = {
 };
 export const credentials={
   web_url: "godrejkhargar.com",
-  web_name: "Satyam Metro Showstoppers",
+  web_name: "Godrej Varanya Kharghar",
   logo_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1npNt53HoKFm9ngdtacVVTo2VGLK4eXKVPQ&s",
 }
 

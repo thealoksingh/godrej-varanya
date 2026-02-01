@@ -77,7 +77,7 @@ const Amenities = () => {
                       className="w-full h-57.5 object-cover"
                     />
                   </div>
-                  <span className="absolute bottom-6 left-2 text-sm font-bold text-white tracking-wider uppercase bg-black/60 px-3 py-1 border border-[var(--clr-p)] border-l-4 border-0">
+                <span className="absolute bottom-6 left-2 text-sm font-bold text-white tracking-wider uppercase bg-black/60 px-3 py-1 border border-[var(--clr-p)] border-l-4 border-0">
                     {item.title}
                   </span>
                 </div>

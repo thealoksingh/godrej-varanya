@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import siteVisitImage from "../assets/site_visit.webp";
 import patternTexture from "../assets/pattern.webp";
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { User } from "lucide-react";
 
 const ContactPage = ({ onRequestCallBack }) => {
-  const [phone, setPhone] = useState('');
-  const [name, setName] = useState('');
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
   const [consent, setConsent] = useState(false);
-
 
   return (
     <section
@@ -47,7 +46,10 @@ const ContactPage = ({ onRequestCallBack }) => {
             </h3>
             {/* Name Input with Icon */}
             <div className="relative mb-3">
-              <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <User
+                size={18}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
               <input
                 type="text"
                 placeholder="Enter your name"
@@ -60,26 +62,28 @@ const ContactPage = ({ onRequestCallBack }) => {
             {/* Phone Input with react-phone-input-2 */}
             <div className="mb-4">
               <PhoneInput
-                country={'in'}
+                countryCodeEditable={false}
+                autoFormat={false}
+                country={"in"}
                 value={phone}
                 onChange={setPhone}
                 inputStyle={{
-                  width: '100%',
-                  height: '48px',
-                  fontSize: '16px',
-                  border: '1px solid #dadcdf',
-                  borderRadius: '6px'
+                  width: "100%",
+                  height: "48px",
+                  fontSize: "16px",
+                  border: "1px solid #dadcdf",
+                  borderRadius: "6px",
                 }}
                 buttonStyle={{
-                  border: '1px solid #d1d5db',
-                  borderRadius: '6px 0 0 6px'
+                  border: "1px solid #d1d5db",
+                  borderRadius: "6px 0 0 6px",
                 }}
                 dropdownStyle={{
-                  zIndex: 999
+                  zIndex: 999,
                 }}
               />
             </div>
-            
+
             {/* Consent Checkbox */}
             <div className="flex items-start gap-2 text-xs text-gray-600 mb-4">
               <input
@@ -97,8 +101,7 @@ const ContactPage = ({ onRequestCallBack }) => {
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Privacy Policy
-                </a>{" "}
-                |{" "}
+                </a>
                 <a
                   href="#"
                   className="text-blue-600 underline hover:text-blue-800"
@@ -110,9 +113,9 @@ const ContactPage = ({ onRequestCallBack }) => {
                 products and offers.
               </label>
             </div>
-            
-           <button className="animated-gradient text-white px-8 py-2 w-full md:w-fit rounded-md font-semibold">
-             Submit
+
+            <button className="animated-gradient text-white px-8 py-2 w-full md:w-fit rounded-md font-semibold">
+              Submit
             </button>
           </div>
 

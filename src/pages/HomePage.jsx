@@ -9,10 +9,7 @@ import NRIServices from "../components/NRIServices";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MobileFooter from "../components/MobileFooter";
-import BrochureForm from "../components/BrochureForm";
 import InterestForm from "../components/InterestForm";
-import MobileForm from "../components/MobileForm";
-import OfferPriceForm from "../components/OfferPriceForm";
 import DynamicSEO from "../components/DynamicSEO";
 import AboutPage from "./AboutPage";
 import HighlightPage from "./HighlightPage";
@@ -28,9 +25,7 @@ const REPEAT_POPUP_INTERVAL = 10000; // 10 seconds
 const HomePage = () => {
   const [isInterestFormOpen, setIsInterestFormOpen] = useState(false);
   const [isBrochureFormOpen, setIsBrochureFormOpen] = useState(false);
-  const [isOfferPriceFormOpen, setIsOfferPriceFormOpen] = useState(false);
   const [formMode, setFormMode] = useState("");
-  const [offerType, setOfferType] = useState("");
 
   useEffect(() => {
     console.log("HomePage mounted - useEffect running");
@@ -81,11 +76,6 @@ const HomePage = () => {
   return (
     <>
       <DynamicSEO />
-      {/* <Header onBrochureClick={() => setIsBrochureFormOpen(true)} /> */}
-      {isBrochureFormOpen && (
-        <BrochureForm onClose={() => setIsBrochureFormOpen(false)} />
-      )}
-
       <Hero
         onRequestCallBack={() => {
           setIsInterestFormOpen(true);
@@ -96,8 +86,7 @@ const HomePage = () => {
         <InterestForm mode={formMode} onClose={handleInterestFormClose} />
       )}
       <div className="lg:p-4 p-2 bg-[#E2E6E9]">
-        <MobileForm />
-        <AboutPage
+           <AboutPage
           onRequestCallBack={() => {
             setIsInterestFormOpen(true);
             setFormMode("Download Brochure");
@@ -105,16 +94,17 @@ const HomePage = () => {
         />
         <HighlightPage />
         <Price
-          onOfferPriceClick={(type) => {
-            setIsOfferPriceFormOpen(true);
-            setFormMode("Get More Detail About Poject");
-          }}
+         onRequestCallBack={() => {
+          setIsInterestFormOpen(true);
+          setFormMode("Get Detail About Varanya");
+        }}
         />
         <FloorPlan
-          onOfferPriceClick={(type) => {
-            setIsOfferPriceFormOpen(true);
-            setOfferType(type);
-          }}
+         onRequestCallBack={() => {
+          setIsInterestFormOpen(true);
+          setFormMode("Get Detail About Varanya");
+        }}
+         
         />
 
         <AmenitiesPage />
@@ -131,12 +121,7 @@ const HomePage = () => {
           <Footer />
       </div>
 
-      {isOfferPriceFormOpen && (
-        <OfferPriceForm
-          type={offerType}
-          onClose={() => setIsOfferPriceFormOpen(false)}
-        />
-      )}
+    
       {/* <NRIServices /> */}
     
       <MobileFooter />

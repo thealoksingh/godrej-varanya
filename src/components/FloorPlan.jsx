@@ -3,7 +3,7 @@ import oneCrestMasterPlan from "../assets/plans/one-crest-master-plan.webp";
 import oneCrestUnitPlan from "../assets/plans/one-crest-unit-floor-plan.webp";
 import Divider from "./Divider";
 
-const FloorPlan = ({ onOfferPriceClick }) => {
+const FloorPlan = ({ onRequestCallBack }) => {
   const plans = [
     {
        buttonText: "Request Master Plan Layout",
@@ -48,12 +48,8 @@ const FloorPlan = ({ onOfferPriceClick }) => {
               {/* Dark Overlay with Text */}
               <div className="absolute inset-x-0 top-0 h-0 bg-black/40 flex items-center justify-center transition-all duration-500 ease-in-out group-hover:h-full origin-top">
                 <button
-                  onClick={() =>
-                    onOfferPriceClick(
-                      index === 0 ? "layout plan" : "floor plan",
-                    )
-                  }
-                  className="mt-6 animated-gradient animated-border text-white px-10 py-2.5 rounded-full text-sm font-medium shadow-md hover:opacity-90 transition-opacity hover:cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200"
+                  onClick={onRequestCallBack}
+                 className="mt-6 animated-gradient animated-border text-white px-10 py-2.5 rounded-full text-sm font-medium shadow-md hover:opacity-90 transition-opacity hover:cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-200"
                 >
                   {plan.buttonText}
                 </button>

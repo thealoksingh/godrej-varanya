@@ -3,7 +3,7 @@ import oneCrestPriceSheet from "../assets/Prices/one-crest-price-detail-sheet.jp
 import { createProductSchema, pushSchemaToGTM } from "../utils/schemaUtils";
 import Divider from "./Divider";
 
-const Price = ({ onOfferPriceClick }) => {
+const Price = ({ onRequestCallBack }) => {
   const priceData = [
     {
       type: "2 BHK",
@@ -66,7 +66,7 @@ const Price = ({ onOfferPriceClick }) => {
                     </td>
                     <td className="p-4 text-right">
                       <button
-                        onClick={() => onOfferPriceClick("price-breakup")}
+                        onClick={onRequestCallBack}
                         className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px] font-semibold text-xl transition-all active:scale-95 cursor-pointer mb-2"
                       >
                         Complete Costing Detail
@@ -103,7 +103,7 @@ const Price = ({ onOfferPriceClick }) => {
 
                 {/* Button */}
                 <button
-                  onClick={() => onOfferPriceClick("price-breakup")}
+                  onClick={onRequestCallBack}
                   className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px]  font-semibold text-xl transition-all active:scale-95 cursor-pointer mb-2"
                 >
                   Complete Costing Detail

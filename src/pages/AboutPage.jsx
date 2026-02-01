@@ -3,7 +3,6 @@ import SEO from '../components/SEO';
 import About from '../components/About';
 
 const AboutPage = ({onRequestCallBack}) => {
-  console.log("AboutPage onRequestCallBack:", onRequestCallBack); // Debug log
   return (
     <>
       <SEO 

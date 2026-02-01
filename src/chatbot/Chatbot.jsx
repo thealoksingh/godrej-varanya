@@ -168,7 +168,7 @@ export default function ChatBot({ open = true, setOpen }) {
 
     const finalMessage = `Hey, I'm ${data.name}. 
 I'm interested in ${data.interest || "property details"} and I'm willing to buy ${data.flatType || "a flat"}.
-Message: ${data.message || `No specific message. My address is: ${window.user_address || "Location not available"}`}
+Message: ${data.message || `No specific message.My address is: ${window.user_address || "Location not available"}`}
 `;
 
     // 1️⃣ Submit to backend
@@ -284,7 +284,7 @@ Message: ${data.message || `No specific message. My address is: ${window.user_ad
               className="p-4 text-white flex items-center gap-3 shrink-0"
               style={{
                 background:
-                  "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
+                "linear-gradient(135deg, var(--clr-p)  0%, var(--clr-s) 100%)",
               }}
             >
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 overflow-hidden">

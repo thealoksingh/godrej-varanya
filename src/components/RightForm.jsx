@@ -7,8 +7,8 @@ import {
   messageTemplates,
 } from "../key/messageUtils";
 import axios from "axios";
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { User, Mail } from "lucide-react";
 import calendarIcon from "../assets/gifs/Calendar.gif";
 import callUsIcon from "../assets/gifs/callus.gif";
@@ -188,7 +188,10 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           <div className=" space-y-2 ">
             {/* Name Input with Icon */}
             <div className="relative">
-              <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <User
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
               <input
                 type="text"
                 placeholder="Enter Your Name Here.."
@@ -206,7 +209,10 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
 
             {/* Email Input with Icon */}
             <div className="relative">
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Mail
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
               <input
                 type="email"
                 placeholder="Email (Optional)"
@@ -224,23 +230,27 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             {/* Phone Input with react-phone-input-2 */}
             <div>
               <PhoneInput
-                country={'in'}
+                country={"in"}
+                autoFormat={false}
+                countryCodeEditable={false}
                 value={formData.mobile}
-                onChange={(phone) => setFormData({ ...formData, mobile: phone })}
+                onChange={(phone) =>
+                  setFormData({ ...formData, mobile: phone })
+                }
                 inputStyle={{
-                  width: '100%',
-                  height: '40px',
-                  fontSize: '14px',
-                  border: '1px solid var(--clr-p)',
-                  borderRadius: '2px'
+                  width: "100%",
+                  height: "40px",
+                  fontSize: "14px",
+                  border: "1px solid var(--clr-p)",
+                  borderRadius: "2px",
                 }}
                 buttonStyle={{
-                  border: '1px solid var(--clr-p)',
-                  borderRadius: '2px 0 0 2px',
-                  height: '40px'
+                  border: "1px solid var(--clr-p)",
+                  borderRadius: "2px 0 0 2px",
+                  height: "40px",
                 }}
                 dropdownStyle={{
-                  zIndex: 9999
+                  zIndex: 9999,
                 }}
               />
               {errors.mobile && (
@@ -293,7 +303,9 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
               alt="Free Site Visit"
               className="w-13 h-13"
             />
-            <p className="text-center text-xs mt-2 text-gray-700 font-medium">Free Site Visit</p>
+            <p className="text-center text-xs mt-2 text-gray-700 font-medium">
+              Free Site Visit
+            </p>
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
             <img
@@ -301,7 +313,9 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
               alt="Instant Call Back"
               className="w-10 h-10"
             />
-            <p className="text-center text-xs mt-4 text-gray-700 font-medium">Instant Call Back</p>
+            <p className="text-center text-xs mt-4 text-gray-700 font-medium">
+              Instant Call Back
+            </p>
           </div>
           <div className="w-1/3 flex flex-col items-center justify-center">
             <img
@@ -309,7 +323,9 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
               alt="Best Price Guarantee"
               className="w-12 h-12"
             />
-            <p className="text-center text-xs mt-2 text-gray-700 font-medium">Best Price</p>
+            <p className="text-center text-xs mt-2 text-gray-700 font-medium">
+              Best Price
+            </p>
           </div>
         </div>
       </div>
