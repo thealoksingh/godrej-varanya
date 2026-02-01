@@ -37,8 +37,13 @@ const Footer = () => {
           us directly via the provided contact information on this website. We
           appreciate your visit.
         </p>
-         <p className="text-[12px] text-gray-600">© Privacy Policy | Terms & Conditions</p>
-      </div>
+        <a 
+         href="/privacy"
+        >
+ <p className="text-[12px] text-gray-600">© Privacy Policy | Terms & Conditions</p>
+      
+        </a>
+        </div>
       <div className="bg-black flex justify-center items-center h-10 rounded-b-lg text-white text-[12px]">
         <p>All Rights Reserved. © 2026 PropSolutions4U Pvt. Ltd.</p>
       </div>

@@ -4,11 +4,110 @@ import patternTexture from "../assets/pattern.webp";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { User } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
+import { createMessageWithAddress, messageTemplates } from "../key/messageUtils";
+import axios from "axios";
 
 const ContactPage = ({ onRequestCallBack }) => {
-  const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    mobile: "",
+    source: "godrejkhargar.com",
+  });
   const [consent, setConsent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showFailureAlert, setShowFailureAlert] = useState(false);
+  const [errors, setErrors] = useState({ name: "", mobile: "", consent: "" });
+
+  const validateForm = (data) => {
+    const errors = {};
+    if (!regexPatterns.namePattern.test(data.name)) {
+      errors.name = "Name must be 2-50 characters";
+    }
+    if (!/^[6-9]\d{9}$/.test(data.mobile)) {
+      errors.mobile = "Enter valid 10-digit mobile";
+    }
+    if (!consent) {
+      errors.consent = "Please accept terms";
+    }
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowSuccessAlert(false);
+    setShowFailureAlert(false);
+
+    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+    const submissionData = { ...formData, mobile: cleanedMobile };
+
+    if (!validateForm(submissionData)) return;
+
+    setLoading(true);
+    let backendSuccess = false;
+    let emailSuccess = false;
+
+    try {
+      const backendMessage = createMessageWithAddress(messageTemplates.general, formData.name);
+      const emailMessage = createMessageWithAddress(messageTemplates.general, formData.name);
+
+      const finalData = { ...submissionData, message: backendMessage };
+ console.log("Sending data to backend:", finalData);
+      // Backend submission
+      try {
+        const response = await axios.post(`${baseurl}/forms/submit`,finalData);
+        if (response.status === 201 || response.status === 200) {
+          backendSuccess = true;
+        }
+      } catch (error) {
+        console.error("Backend submission failed:", error);
+      }
+      
+      // EmailJS submission
+      try {
+        await emailjs.send(
+          emailKeys.serviceId,
+          emailKeys.templateId,
+          {
+            user_name: formData.name,
+            user_phone: formData.mobile,
+            user_email: "Not Provided",
+            web_url: credentials.web_url,
+            web_name: credentials.web_name,
+            logo_url: credentials.logo_url,
+            message: emailMessage,
+          },
+          emailKeys.publicKey
+        );
+        emailSuccess = true;
+      } catch (error) {
+        console.error("Email submission failed:", error);
+      }
+
+      if (backendSuccess || emailSuccess) {
+        if (typeof gtag !== "undefined") {
+          gtag("event", "conversion", {
+            send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+            value: 1.0,
+            currency: "INR",
+          });
+        }
+        setShowSuccessAlert(true);
+        setFormData({ name: "", mobile: "", source: "godrejkhargar.com" });
+        setConsent(false);
+      } else {
+        setShowFailureAlert(true);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setShowFailureAlert(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
@@ -44,6 +143,20 @@ const ContactPage = ({ onRequestCallBack }) => {
             <h3 className="text-xl font-bold text-[var(--clr-p)] mb-4">
               Schedule a Free Site Visit
             </h3>
+            
+            {/* Alerts */}
+            {showSuccessAlert && (
+              <div className="text-green-600 text-center text-sm mb-2">
+                Submitted successfully ✅
+              </div>
+            )}
+            {showFailureAlert && (
+              <div className="text-red-600 text-center text-sm mb-2">
+                Submission failed ❌
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit}>
             {/* Name Input with Icon */}
             <div className="relative mb-3">
               <User
@@ -53,10 +166,13 @@ const ContactPage = ({ onRequestCallBack }) => {
               <input
                 type="text"
                 placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full pl-10 pr-3 py-3 rounded-md border border-[#dadcdf] focus:outline-none focus:ring-2 focus:ring-[var(--clr-p)]"
               />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+              )}
             </div>
 
             {/* Phone Input with react-phone-input-2 */}
@@ -64,9 +180,12 @@ const ContactPage = ({ onRequestCallBack }) => {
               <PhoneInput
                 countryCodeEditable={false}
                 autoFormat={false}
+                inputProps={{
+                  maxLength: 13,
+                }}
                 country={"in"}
-                value={phone}
-                onChange={setPhone}
+                value={formData.mobile}
+                onChange={(phone) => setFormData({ ...formData, mobile: phone })}
                 inputStyle={{
                   width: "100%",
                   height: "48px",
@@ -82,6 +201,9 @@ const ContactPage = ({ onRequestCallBack }) => {
                   zIndex: 999,
                 }}
               />
+              {errors.mobile && (
+                <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
+              )}
             </div>
 
             {/* Consent Checkbox */}
@@ -90,20 +212,24 @@ const ContactPage = ({ onRequestCallBack }) => {
                 type="checkbox"
                 id="consent"
                 checked={consent}
-                onChange={(e) => setConsent(e.target.checked)}
+                onChange={(e) => {
+                  setConsent(e.target.checked);
+                  if (e.target.checked) {
+                    setErrors(prev => ({ ...prev, consent: "" }));
+                  }
+                }}
                 className="mt-1 accent-[var(--clr-p)]"
-                required
               />
               <label htmlFor="consent" className="text-[10px] leading-tight">
                 I consent to the processing of provided data according to{" "}
                 <a
-                  href="#"
+                  href="/privacy"
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Privacy Policy
-                </a>
+                </a>{" "}|{" "}
                 <a
-                  href="#"
+                   href="/privacy"
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Terms & Conditions
@@ -113,10 +239,18 @@ const ContactPage = ({ onRequestCallBack }) => {
                 products and offers.
               </label>
             </div>
+            {errors.consent && (
+              <p className="text-red-500 text-xs mt-1">{errors.consent}</p>
+            )}
 
-            <button className="animated-gradient text-white px-8 py-2 w-full md:w-fit rounded-md font-semibold">
-              Submit
+            <button 
+              type="submit"
+              disabled={loading}
+              className="animated-gradient text-white px-8 py-2 w-full md:w-fit rounded-md font-semibold"
+            >
+              {loading ? "Submitting..." : "Submit"}
             </button>
+            </form>
           </div>
 
           {/* RIGHT SECTION */}

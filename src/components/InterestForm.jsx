@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { X, User, Mail } from "lucide-react";
 import emailjs from "@emailjs/browser";
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
 import {
   createMessageWithAddress,
@@ -39,7 +39,7 @@ const InterestForm = ({ onClose, mode }) => {
     }
 
     if (!mobilePattern.test(mobile)) {
-      newErrors.mobile = "Mobile must be 10 digits";
+      newErrors.mobile = "Enter a Valid Mobile no.";
     }
 
     setErrors(newErrors);
@@ -80,23 +80,19 @@ const InterestForm = ({ onClose, mode }) => {
     // console.log("Using backend message template for mode:", backendMessage);
     //  console.log("Using email message template for mode:", emailMessage);
 
-    console.log('Form submission data:', {
-      name: formData.name,
-      mobile: formData.mobile,
-      email: formData.email,
-      source: formData.source,
-      mode: mode
-    });
+    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
 
     const submissionData = {
       ...formData,
+      mobile: cleanedMobile,
       message: backendMessage,
     };
 
-    if (!validateForm(formData)) {
+    if (!validateForm(submissionData)) {
       return;
     }
 
+    console.log("submission data ==>", submissionData);
     setLoading(true);
     let backendSuccess = false;
     let emailSuccess = false;
@@ -167,7 +163,7 @@ const InterestForm = ({ onClose, mode }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="relative w-full max-w-lg overflow-hidden rounded-xl bg-white shadow-2xl mx-4">
         {/* Header */}
         <div className="relative animated-gradient py-4 text-center">
@@ -206,11 +202,17 @@ const InterestForm = ({ onClose, mode }) => {
           </p>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="w-full space-y-4 overflow-visible">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full space-y-4 overflow-visible"
+          >
             <div className="flex flex-col md:flex-row gap-4">
               {/* Name Input with Icon */}
               <div className="flex-1 relative">
-                <User size={16} className="absolute left-3 top-1/3 -translate-y-1/2 text-gray-400" />
+                <User
+                  size={16}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                />
                 <input
                   type="text"
                   placeholder="Name"
@@ -229,32 +231,34 @@ const InterestForm = ({ onClose, mode }) => {
               {/* Phone Input with Country Selector */}
               <div className="flex-1">
                 <PhoneInput
-                 countryCodeEditable={false}
+                  countryCodeEditable={false}
                   autoFormat={false}
-                  country={'in'}
+                  inputProps={{
+                    maxLength: 13,
+                  }}
+                  country={"in"}
                   value={formData.mobile}
                   onChange={(phone) => {
-                    console.log('Phone input value:', phone);
                     setFormData({ ...formData, mobile: phone });
                   }}
                   inputStyle={{
-                    width: '100%',
-                    height: '40px',
-                    fontSize: '14px',
-                    border: '1px solid #d1d5db',
-                    borderRadius: '6px'
+                    width: "100%",
+                    height: "40px",
+                    fontSize: "14px",
+                    border: "1px solid #d1d5db",
+                    borderRadius: "6px",
                   }}
                   buttonStyle={{
-                    border: '1px solid #d1d5db',
-                    borderRadius: '6px 0 0 6px',
-                    height: '40px'
+                    border: "1px solid #d1d5db",
+                    borderRadius: "6px 0 0 6px",
+                    height: "40px",
                   }}
                   dropdownStyle={{
-                    zIndex: 9999
+                    zIndex: 9999,
                   }}
                   disableCountryCode={false}
-                  onlyCountries={['in', 'us', 'gb', 'ae', 'sg']}
-                  preferredCountries={['in']}
+                  onlyCountries={["in", "us", "gb", "ae", "sg"]}
+                  preferredCountries={["in"]}
                 />
                 {errors.mobile && (
                   <p className="text-red-500 text-xs mt-1">{errors.mobile}</p>
@@ -264,7 +268,10 @@ const InterestForm = ({ onClose, mode }) => {
 
             {/* Email Input with Icon */}
             <div className="relative">
-              <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+              <Mail
+                size={16}
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              />
               <input
                 type="email"
                 placeholder="Email (Optional)"
@@ -289,39 +296,34 @@ const InterestForm = ({ onClose, mode }) => {
                 {loading ? "Submitting..." : "Submit"}
               </button>
               <p className="text-center m-2">OR</p>
-            
             </div>
           </form>
-            <a
-                href={`https://wa.me/${
-                  contactConfig.phoneNumber
-                }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  // Track WhatsApp click with gtag
-                  if (typeof gtag !== "undefined") {
-                    gtag("event", "conversion", {
-                      send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
-                      value: 1.0,
-                      currency: "INR",
-                      event_callback: function () {
-                        console.log("WhatsApp contact conversion tracked");
-                      },
-                    });
-                  }
-                }}
-                className="right-0 bottom-0 flex justify-center items-center group"
-              >
-                <button className="flex gap-2  items-center font-semibold justify-center bg-green-500 w-68 text-white text-sm px-8 py-2 rounded-lg shadow-lg hover:brightness-110 active:scale-95">
-                  <img
-                    src={whatsappAnimIcon}
-                    alt="WhatsApp"
-                    className="w-6 h-6"
-                  />
-                  Connect On Whatsapp
-                </button>
-              </a>
+          <a
+            href={`https://wa.me/${
+              contactConfig.phoneNumber
+            }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              // Track WhatsApp click with gtag
+              if (typeof gtag !== "undefined") {
+                gtag("event", "conversion", {
+                  send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+                  value: 1.0,
+                  currency: "INR",
+                  event_callback: function () {
+                    console.log("WhatsApp contact conversion tracked");
+                  },
+                });
+              }
+            }}
+            className="right-0 bottom-0 flex justify-center items-center group"
+          >
+            <button className="flex gap-2  items-center font-semibold justify-center bg-green-500 w-68 text-white text-sm px-8 py-2 rounded-lg shadow-lg hover:brightness-110 active:scale-95">
+              <img src={whatsappAnimIcon} alt="WhatsApp" className="w-6 h-6" />
+              Connect On Whatsapp
+            </button>
+          </a>
         </div>
       </div>
     </div>

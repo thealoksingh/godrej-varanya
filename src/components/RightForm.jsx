@@ -25,39 +25,50 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     source: "godrejkhargar.com",
   });
   const [consentChecked, setConsentChecked] = useState(false);
-
   const [loading, setLoading] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showFailureAlert, setShowFailureAlert] = useState(false);
-  const [errors, setErrors] = useState({ name: "", email: "", mobile: "" });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    consent: "",
+  });
 
-  const validateForm = (formData) => {
-    const { name, email, mobile } = formData;
-    const { namePattern, emailPattern, mobilePattern } = regexPatterns;
-    const newErrors = { name: "", email: "", mobile: "" };
+  const validateForm = (data) => {
+    const errors = {};
 
-    if (!namePattern.test(name)) {
-      newErrors.name = "Name must be 2-50 characters (letters only)";
+    if (!regexPatterns.namePattern.test(data.name)) {
+      errors.name = "Name must be 2-50 characters";
     }
 
-    if (email && !emailPattern.test(email)) {
-      newErrors.email = "Invalid email format";
+    if (data.email && !regexPatterns.emailPattern.test(data.email)) {
+      errors.email = "Invalid email";
     }
 
-    if (!mobilePattern.test(mobile)) {
-      newErrors.mobile = "Please enter a valid mobile number";
+    if (!/^[6-9]\d{9}$/.test(data.mobile)) {
+      errors.mobile = "Enter valid 10-digit mobile";
     }
+  if (!consentChecked) {
+    errors.consent = "Please accept terms";
+  }
+    setErrors(errors);
 
-    setErrors(newErrors);
-    return !newErrors.name && !newErrors.email && !newErrors.mobile;
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setShowSuccessAlert(false);
     setShowFailureAlert(false);
+  
+    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+    const submissionData = {
+      ...formData,
+      mobile: cleanedMobile,
+    };
 
-    if (!validateForm(formData) || !consentChecked) {
+    if (!validateForm(submissionData)) {
       return;
     }
 
@@ -65,75 +76,90 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     let backendSuccess = false;
     let emailSuccess = false;
 
-    // Create messages with address
-    const backendMessage = createMessageWithAddress(
-      messageTemplates.general,
-      formData.name,
-    );
-    const emailMessage = createMessageWithAddress(
-      messageTemplates.general,
-      formData.name,
-    );
-
-    // 1️⃣ Submit to backend
     try {
-      const response = await axios.post(`${baseurl}/forms/submit`, {
-        ...formData,
-        message: backendMessage,
-      });
-      if (response.status === 201 || response.status === 200) {
-        backendSuccess = true;
-      }
-    } catch (error) {
-      console.error("Backend submission failed:", error);
-    }
-
-    // 2️⃣ Send Email via EmailJS
-    try {
-      await emailjs.send(
-        emailKeys.serviceId,
-        emailKeys.templateId,
-        {
-          user_name: formData.name,
-          user_phone: formData.mobile,
-          user_email: formData.email,
-          web_url: credentials.web_url,
-          web_name: credentials.web_name,
-          logo_url: credentials.logo_url,
-          message: emailMessage,
-        },
-        emailKeys.publicKey,
+      // Create messages with address
+      const backendMessage = createMessageWithAddress(
+        messageTemplates.general,
+        formData.name,
       );
-      emailSuccess = true;
-    } catch (error) {
-      console.error("Email submission failed:", error);
-    }
+      const emailMessage = createMessageWithAddress(
+        messageTemplates.general,
+        formData.name,
+      );
+      const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
 
-    // 3️⃣ Show result
-    if (backendSuccess || emailSuccess) {
-      // Track conversion with gtag
-      if (typeof gtag !== "undefined") {
-        gtag("event", "conversion", {
-          send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
-          value: 1.0,
-          currency: "INR",
-          event_callback: function () {
-            console.log("Right form conversion tracked");
-          },
-        });
+      const submissionData = {
+        ...formData,
+        mobile: cleanedMobile,
+        message: backendMessage,
+      };
+      if (!validateForm(submissionData) || !consentChecked) {
+        return;
       }
-      setShowSuccessAlert(true);
-      setFormData({
-        name: "",
-        mobile: "",
-        email: "",
-        source: "godrejkhargar.com",
-      });
-    } else {
-      setShowFailureAlert(true);
-    }
+      // 1️⃣ Submit to backend
+      console.log("Submitting data:", submissionData);
+      try {
+        const response = await axios.post(
+          `${baseurl}/forms/submit`,
+          submissionData,
+        );
+        if (response.status === 201 || response.status === 200) {
+          backendSuccess = true;
+        }
+      } catch (error) {
+        console.error("Backend submission failed:", error);
+      }
 
-    setLoading(false);
+      // 2️⃣ Send Email via EmailJS
+      try {
+        await emailjs.send(
+          emailKeys.serviceId,
+          emailKeys.templateId,
+          {
+            user_name: formData.name,
+            user_phone: formData.mobile,
+            user_email: formData.email,
+            web_url: credentials.web_url,
+            web_name: credentials.web_name,
+            logo_url: credentials.logo_url,
+            message: emailMessage,
+          },
+          emailKeys.publicKey,
+        );
+        emailSuccess = true;
+      } catch (error) {
+        console.error("Email submission failed:", error);
+      }
+
+      // 3️⃣ Show result
+      if (backendSuccess || emailSuccess) {
+        // Track conversion with gtag
+        if (typeof gtag !== "undefined") {
+          gtag("event", "conversion", {
+            send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
+            value: 1.0,
+            currency: "INR",
+            event_callback: function () {
+              console.log("Right form conversion tracked");
+            },
+          });
+        }
+        setShowSuccessAlert(true);
+        setFormData({
+          name: "",
+          mobile: "",
+          email: "",
+          source: "godrejkhargar.com",
+        });
+      } else {
+        setShowFailureAlert(true);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setShowFailureAlert(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -232,6 +258,9 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
               <PhoneInput
                 country={"in"}
                 autoFormat={false}
+                inputProps={{
+                  maxLength: 13,
+                }}
                 countryCodeEditable={false}
                 value={formData.mobile}
                 onChange={(phone) =>
@@ -262,20 +291,27 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 type="checkbox"
                 id="consent"
                 checked={consentChecked}
-                onChange={(e) => setConsentChecked(e.target.checked)}
+                onChange={(e) => {
+                  setConsentChecked(e.target.checked);
+
+                  if (e.target.checked) {
+                    setErrors((prev) => ({ ...prev, consent: "" }));
+                  }
+                }}
                 className="mt-1 accent-[var(--clr-p)]"
-                required
               />
+
               <label htmlFor="consent" className="text-[10px] leading-tight">
                 I consent to the processing of provided data according to{" "}
                 <a
-                  href="#"
+                  href="/privacy"
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Privacy Policy
-                </a>
+                </a>{" "}
+                |{" "}
                 <a
-                  href="#"
+                    href="/privacy"
                   className="text-blue-600 underline hover:text-blue-800"
                 >
                   Terms & Conditions
@@ -285,10 +321,13 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
                 products and offers.
               </label>
             </div>
+            {errors.consent && (
+              <p className="text-red-500 text-xs mt-1">{errors.consent}</p>
+            )}
             <div className="flex justify-center pt-2">
               <button
                 type="submit"
-                disabled={loading || !consentChecked}
+                disabled={loading}
                 className="animated-gradient animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90"
               >
                 {loading ? "Submitting..." : "Pre-Register Now"}
