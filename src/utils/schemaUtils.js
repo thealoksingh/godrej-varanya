@@ -2,11 +2,11 @@
 export const createProductSchema = (priceData) => ({
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "One Crest - Satyam Metro Showstopper",
-  "description": "Premium luxury apartments in Kharghar by Satyam Metro Developers. 2, 3 & 4 BHK homes with world-class amenities.",
+  "name": "Godrej Varanya",
+  "description": "Premium luxury apartments in Kharghar by Godrej Properties. 2 & 3 BHK homes with world-class amenities.",
   "brand": {
     "@type": "Brand",
-    "name": "Satyam Metro Developers"
+    "name": "Godrej Properties"
   },
   "category": "Real Estate",
   "offers": priceData.map(item => ({
@@ -20,13 +20,13 @@ export const createProductSchema = (priceData) => ({
     "availability": "https://schema.org/InStock",
     "seller": {
       "@type": "Organization",
-      "name": "Satyam Metro Developers"
+      "name": "Godrej Properties"
     }
   })),
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": "50"
+    "ratingValue": "4.9",
+    "reviewCount": "75"
   }
 });
 

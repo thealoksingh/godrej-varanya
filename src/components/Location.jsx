@@ -108,7 +108,7 @@ const Location = ({onRequestCallBack}) => {
       {/* Map Section */}
       <div className="w-full h-96 mt-6 rounded-lg overflow-hidden border border-gray-200 shadow-sm mb-6 relative">
         <iframe
-          title="Satyam Metro Showstopper Location"
+          title="Godrej Varanya Location Kharghar Navi Mumbai"
           src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.234!2d${contactConfig.propertyLocation.longitude}!3d${contactConfig.propertyLocation.latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDAyJzUwLjIiTiA3M8KwMDQnMjQuMSJF!5e0!3m2!1sen!2sin!4v1234567890`}
           className="w-full h-full border-0"
           allowFullScreen=""
@@ -121,7 +121,7 @@ const Location = ({onRequestCallBack}) => {
             <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[#A67C48] shadow-lg animate-bounce">
               <img
                 src={godrejVaranyaTopSwimmingPool}
-                alt="One Crest project location marker - Satyam Metro Showstopper Sector 20 Kharghar Navi Mumbai"
+                alt="Godrej Varanya project location marker - Premium luxury apartments Kharghar Navi Mumbai"
                 className="w-full h-full object-cover"
               />
             </div>

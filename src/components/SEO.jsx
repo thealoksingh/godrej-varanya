@@ -37,35 +37,36 @@ const SEO = ({ title, description, keywords, canonical }) => {
 
 export default SEO;
 
-// SEO Keywords for Satyam Metro Showstopper
+// SEO Keywords for Godrej Varanya
 export const seoKeywords = {
   primary: [
-    'Satyam Metro Showstopper',
+    'Godrej Varanya',
+    'Godrej Properties Kharghar',
     'luxury apartments Kharghar',
     '2 BHK Kharghar',
     '3 BHK Kharghar',
-    '4 BHK Navi Mumbai',
-    'flats in Sector 20 Kharghar'
+    'new launch Kharghar',
+    'Godrej project Kharghar'
   ],
   secondary: [
-    'property near Kharghar metro',
-    'apartments near Kharghar railway station',
-    'Navi Mumbai real estate',
-    'Satyam Developers',
+    'best property invest Navi Mumbai',
+    'Godrej Varanya luxury apartment',
+    'launching soon Kharghar',
     'premium flats Kharghar',
-    'residential projects Navi Mumbai',
+    'Godrej properties Navi Mumbai',
+    'residential projects Kharghar',
     'luxury homes Kharghar',
-    'new launch Kharghar',
-    'ready to move flats Navi Mumbai'
+    'property near Kharghar metro',
+    'apartments near Kharghar railway station'
   ],
   location: [
-    'Sector 20 Kharghar',
     'Kharghar Navi Mumbai',
     'near Kharghar Metro Station',
     'near Kharghar Railway Station',
     'Mumbai Pune Expressway',
     'Belapur CBD',
-    'Taloja MIDC'
+    'Central Park Kharghar',
+    'Navi Mumbai International Airport'
   ],
   amenities: [
     'luxury amenities',
@@ -75,6 +76,7 @@ export const seoKeywords = {
     'children play area',
     'landscaped gardens',
     'security',
-    'parking'
+    'parking',
+    'Godrej Properties amenities'
   ]
 };

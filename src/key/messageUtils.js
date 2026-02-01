@@ -19,10 +19,10 @@ export const createMessageWithAddress = (baseMessage, userName = '') => {
 
 // Message templates
 export const messageTemplates = {
-  general: "Hello Satyam Developers, this is ${name}. I'm interested in your property and would love to have a brief discussion at your convenience.",
-  callback: "Hello Satyam Developers, this is ${name}. I would like to request a callback to discuss your property. Please contact me at your convenience.",
-  brochure: "Hello Satyam Developers, this is ${name}. I would like to download the brochure for your property. Please share the details.",
-  mobile: "Hello Satyam Developers, I'm interested in your property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
-  offerPrice: "Hello Satyam Developers, this is ${name}. I am interested in your property and would appreciate more details regarding the current offers, pricing, and any special benefits available.",
-  brochureRequest: "Hello Satyam Developers, this is ${name}. I'm interested in your property. Could you please send me the brochure?"
+  general: "Hello, this is ${name}. I'm interested in Godrej Varanya property and would love to have a brief discussion at your convenience.",
+  callback: "Hello, this is ${name}. I would like to request a callback to discuss Godrej Varanya property. Please contact me at your convenience.",
+  brochure: "Hello, this is ${name}. I would like to download the brochure for Godrej Varanya property. Please share the details.",
+  mobile: "Hello, I'm interested in Godrej Varanya property and would love to have a brief discussion at your convenience. (this form is submitted from mobile view)",
+  offerPrice: "Hello, this is ${name}. I am interested in Godrej Varanya property and would appreciate more details regarding the current offers, pricing, and any special benefits available.",
+  brochureRequest: "Hello, this is ${name}. I'm interested in Godrej Varanya property. Could you please send me the brochure?"
 };

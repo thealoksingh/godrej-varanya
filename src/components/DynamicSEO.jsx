@@ -7,39 +7,39 @@ const DynamicSEO = () => {
   
   const seoData = {
     '/': {
-      title: 'Satyam Metro Showstopper |Properties in Kharghar, Navi Mumbai | New Launch 2026',
-      description: 'Discover the best new launch properties in Kharghar by Satyam Metro Developers. Premium 2, 3 & 4 BHK luxury apartments in Sector 20, Kharghar, Navi Mumbai.',
-      keywords: 'best properties in Kharghar, new launch in Kharghar, Satyam Developers Kharghar Navi Mumbai, luxury apartments Kharghar'
+      title: 'Godrej Varanya Kharghar | New Launch Luxury Apartments Navi Mumbai | Best Property Investment 2025',
+      description: 'Discover Godrej Varanya - Premium 2 & 3 BHK luxury apartments in Kharghar, Navi Mumbai. New launch by Godrej Properties with world-class amenities. Best property investment opportunity.',
+      keywords: 'Godrej Varanya, Godrej Properties Kharghar, new launch Kharghar, best property invest Navi Mumbai, luxury apartments Kharghar, Godrej project Kharghar'
     },
     '/about': {
-      title: 'About Satyam Metro Developers | CMD Rajesh Gulati | Premium Builder Kharghar, Navi Mumbai',
-      description: 'Learn about Satyam Metro Developers, led by CMD Rajesh Gulati. Over two decades of creating residential landmarks in Kharghar, Navi Mumbai.',
-      keywords: 'Satyam Metro Developers, Rajesh Gulati, real estate developer Kharghar, property builder Navi Mumbai'
+      title: 'About Godrej Varanya | Premium Luxury Apartments Kharghar Navi Mumbai | Godrej Properties',
+      description: 'Learn about Godrej Varanya - Premium residential project by Godrej Properties in Kharghar, Navi Mumbai. Luxury 2 & 3 BHK apartments with world-class amenities.',
+      keywords: 'Godrej Varanya about, Godrej Properties Kharghar, luxury apartments Navi Mumbai, premium residential project'
     },
     '/price': {
-      title: 'Price List | Satyam Metro Showstopper Kharghar | 2, 3, 4 BHK Rates Navi Mumbai',
-      description: 'Check latest prices for 2, 3 & 4 BHK luxury apartments at Satyam Metro Showstopper, Sector 20 Kharghar. Starting from ₹2.4 Cr.',
-      keywords: 'Satyam Metro Showstopper price, 2 BHK price Kharghar, 3 BHK price Navi Mumbai, property rates Kharghar'
+      title: 'Godrej Varanya Price List | 2 & 3 BHK Rates Kharghar | Godrej Properties Navi Mumbai',
+      description: 'Check latest prices for 2 & 3 BHK luxury apartments at Godrej Varanya, Kharghar. Best property investment rates by Godrej Properties in Navi Mumbai.',
+      keywords: 'Godrej Varanya price, 2 BHK price Kharghar, 3 BHK price Navi Mumbai, Godrej Properties rates'
     },
     '/amenities': {
-      title: 'Amenities | Satyam Metro Showstopper Kharghar | 30+ Premium Facilities Navi Mumbai',
-      description: 'Explore 30+ world-class amenities at Satyam Metro Showstopper Kharghar including swimming pool, gymnasium, clubhouse, spa.',
-      keywords: 'amenities Satyam Metro Showstopper, swimming pool Kharghar, gymnasium Navi Mumbai, clubhouse facilities'
+      title: 'Godrej Varanya Amenities | World-Class Facilities Kharghar | Godrej Properties Navi Mumbai',
+      description: 'Explore world-class amenities at Godrej Varanya Kharghar including swimming pool, gymnasium, clubhouse, landscaped gardens by Godrej Properties.',
+      keywords: 'Godrej Varanya amenities, swimming pool Kharghar, gymnasium Navi Mumbai, Godrej Properties facilities'
     },
     '/floorplan': {
-      title: 'Floor Plans | Satyam Metro Showstopper Kharghar | 2, 3, 4 BHK Layouts Navi Mumbai',
-      description: 'View detailed floor plans and unit layouts for 2, 3 & 4 BHK apartments at Satyam Metro Showstopper, Sector 20 Kharghar.',
-      keywords: 'floor plans Satyam Metro Showstopper, 2 BHK layout Kharghar, apartment layouts Navi Mumbai'
+      title: 'Godrej Varanya Floor Plans | 2 & 3 BHK Layouts Kharghar | Godrej Properties Navi Mumbai',
+      description: 'View detailed floor plans and unit layouts for 2 & 3 BHK apartments at Godrej Varanya, Kharghar by Godrej Properties.',
+      keywords: 'Godrej Varanya floor plans, 2 BHK layout Kharghar, 3 BHK apartment layouts Navi Mumbai'
     },
     '/location': {
-      title: 'Location | Satyam Metro Showstopper Sector 20 Kharghar | Prime Connectivity Navi Mumbai',
-      description: 'Discover the prime location of Satyam Metro Showstopper in Sector 20, Kharghar. 3 mins from Metro Station, 5 mins from Railway Station.',
-      keywords: 'Satyam Metro Showstopper location, Sector 20 Kharghar, near Kharghar metro station, connectivity Navi Mumbai'
+      title: 'Godrej Varanya Location | Prime Connectivity Kharghar | Near Metro Station Navi Mumbai',
+      description: 'Discover the prime location of Godrej Varanya in Kharghar, Navi Mumbai. Minutes from Metro Station, Railway Station, and major landmarks.',
+      keywords: 'Godrej Varanya location, Kharghar connectivity, near metro station, Godrej Properties Navi Mumbai'
     },
     '/gallery': {
-      title: 'Gallery | Satyam Metro Showstopper Kharghar | Interior & Exterior Images Navi Mumbai',
-      description: 'View stunning interior and exterior images of Satyam Metro Showstopper luxury apartments in Sector 20, Kharghar.',
-      keywords: 'Satyam Metro Showstopper gallery, interior images Kharghar, luxury apartment photos Navi Mumbai'
+      title: 'Godrej Varanya Gallery | Luxury Apartment Images Kharghar | Godrej Properties Navi Mumbai',
+      description: 'View stunning interior and exterior images of Godrej Varanya luxury apartments in Kharghar, Navi Mumbai by Godrej Properties.',
+      keywords: 'Godrej Varanya gallery, luxury apartment images Kharghar, Godrej Properties photos Navi Mumbai'
     }
   };
 
