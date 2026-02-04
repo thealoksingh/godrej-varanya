@@ -7,7 +7,7 @@ import connectivity from "../assets/gifs/Connectivity.gif";
 import education from "../assets/gifs/Education.gif";
 import healthcare from "../assets/gifs/Healthcare.gif";
 import MallShopping from "../assets/gifs/Mall.gif";
-import techpark from "../assets/gifs/tech.gif";
+import techpark from "../assets/gifs/Tech.gif";
 import Recreation from "../assets/gifs/Hotel.gif";
 
 const Location = ({ onRequestCallBack }) => {
