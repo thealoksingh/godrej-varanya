@@ -119,7 +119,7 @@ const Price = ({ onRequestCallBack }) => {
             <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
               <img
                 src={oneCrestPriceSheet}
-                alt="One Crest price detail sheet - Payment schedule Satyam Metro Showstopper Kharghar pricing"
+                alt="One Crest price detail sheet - Payment schedule Godrej Varanya Kharghar pricing"
                 className="w-full h-full object-cover opacity-80 "
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-transparent transition-colors">

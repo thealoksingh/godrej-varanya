@@ -15,7 +15,7 @@ const FloorPlan = ({ onRequestCallBack }) => {
       buttonText: "Request Unit Plan Layout",
       title: "View Unit Plan",
       img: oneCrestUnitPlan,
-      alt: "One Crest unit floor plan - 2 3 4 BHK apartment layouts Satyam Metro Showstopper",
+      alt: "One Crest unit floor plan - 2 3 4 BHK apartment layouts Godrej Varanya",
     },
   ];
 

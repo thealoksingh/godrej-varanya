@@ -1,4 +1,4 @@
-# SEO Implementation Guide for Satyam Metro Showstopper
+# SEO Implementation Guide for Godrej Varanya
 
 ## ✅ Files Created:
 1. robots.txt - Search engine crawler instructions
@@ -25,7 +25,7 @@
 
 ### 3. Google My Business (Critical for Local SEO)
 - Create listing: https://business.google.com
-- Add: Satyam Metro Showstopper
+- Add: Godrej Varanya
 - Location: Sector 20, Kharghar, Navi Mumbai
 - Category: Real Estate Developer
 - Add photos, hours, phone number
@@ -97,7 +97,7 @@ Install Google Analytics:
 
 ## 🎯 Target Keywords (Already Optimized):
 Primary:
-- Satyam Metro Showstopper
+- Godrej Varanya
 - Luxury apartments Kharghar
 - 2 BHK Kharghar
 - 3 BHK Kharghar

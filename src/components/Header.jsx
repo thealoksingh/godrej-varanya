@@ -120,7 +120,7 @@ const Header = ({ onBrochureClick }) => {
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-100 font-sans border-b-2 border-[#A67C48]/20">
+    <nav className="bg-white shadow-md sticky top-0 z-100 font-sans border-b-2 border-[#6b8d14]/20">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center cursor-pointer">
@@ -175,7 +175,7 @@ const Header = ({ onBrochureClick }) => {
         <div className="lg:hidden flex items-center">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-[#A67C48] focus:outline-none hover:bg-[#A67C48]/10 p-2 rounded-lg transition-colors"
+            className="text-[#6b8d14] focus:outline-none hover:bg-[#6b8d14]/10 p-2 rounded-lg transition-colors"
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
@@ -198,12 +198,12 @@ const Header = ({ onBrochureClick }) => {
               onClick={() => handleNavClick(link.section, link.path)}
               className={`flex items-center gap-3 font-semibold py-3 px-4 rounded-lg cursor-pointer active:scale-95 transition-all duration-200 border ${
                 isActive(link.section)
-                  ? "text-[#A67C48] bg-gradient-to-r from-[#f09051]/30 to-[#9e7242]/30 border-[#A67C48]/50"
-                  : "text-gray-700 hover:bg-gradient-to-r hover:from-[#f09051]/20 hover:to-[#9e7242]/20 hover:text-[#A67C48] border-transparent hover:border-[#A67C48]/30"
+                  ? "text-[#6b8d14] bg-gradient-to-r from-[#f09051]/30 to-[#9e7242]/30 border-[#6b8d14]/50"
+                  : "text-gray-700 hover:bg-gradient-to-r hover:from-[#f09051]/20 hover:to-[#9e7242]/20 hover:text-[#6b8d14] border-transparent hover:border-[#6b8d14]/30"
               }`}
               style={{ animationDelay: `${index * 50}ms` }}
             >
-              <span className="text-[#A67C48]">{link.icon}</span>
+              <span className="text-[#6b8d14]">{link.icon}</span>
               {link.name}
             </div>
           ))}
