@@ -72,6 +72,7 @@ const Header = ({ onBrochureClick }) => {
     const path = location.pathname;
     const sectionMap = {
       "/": "hero",
+      "/highlight": "highlight",
       "/about": "about",
       "/price": "price",
       "/amenities": "amenities",

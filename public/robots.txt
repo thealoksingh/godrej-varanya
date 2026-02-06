@@ -2,12 +2,14 @@ User-agent: *
 Allow: /
 
 # Priority crawling for important pages
+Allow: /highlight
 Allow: /about
 Allow: /price
 Allow: /amenities
 Allow: /floorplan
 Allow: /location
 Allow: /gallery
+Allow: /privacy
 
 # Sitemap location
 Sitemap: https://godrejkhargar.com/sitemap.xml
