@@ -1,6 +1,6 @@
 import React from "react";
-import oneCrestMasterPlan from "../assets/plans/one-crest-master-plan.webp";
-import oneCrestUnitPlan from "../assets/plans/one-crest-unit-floor-plan.webp";
+import masterPlan from "../assets/plans/one-crest-master-plan.webp";
+import unitPlan from "../assets/plans/one-crest-unit-floor-plan.webp";
 import Divider from "./Divider";
 
 const FloorPlan = ({ onRequestCallBack }) => {
@@ -8,14 +8,14 @@ const FloorPlan = ({ onRequestCallBack }) => {
     {
        buttonText: "Request Master Plan Layout",
       title: "Master Plan Layout",
-      img: oneCrestMasterPlan,
-      alt: "One Crest master plan layout - Satyam Metro Developers Kharghar project site plan",
+      img: masterPlan,
+      alt: "Godrej Varanya master plan layout - Navi Mumbai Kharghar project site plan",
     },
     {
       buttonText: "Request Unit Plan Layout",
       title: "View Unit Plan",
-      img: oneCrestUnitPlan,
-      alt: "One Crest unit floor plan - 2 3 4 BHK apartment layouts Godrej Varanya",
+      img: unitPlan,
+      alt: "unit floor plan - 2 3 4 BHK apartment layouts Godrej Varanya",
     },
   ];
 

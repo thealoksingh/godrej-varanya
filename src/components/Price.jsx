@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import oneCrestPriceSheet from "../assets/Prices/one-crest-price-detail-sheet.jpg";
+import priceSheet from "../assets/Prices/one-crest-price-detail-sheet.jpg";
 import { createProductSchema, pushSchemaToGTM } from "../utils/schemaUtils";
 import Divider from "./Divider";
 
@@ -118,8 +118,8 @@ const Price = ({ onRequestCallBack }) => {
           <div className="border border-orange-300 p-2 bg-white shadow-sm w-full">
             <div className="border border-gray-300 aspect-[3/2.2] relative overflow-hidden backdrop-blur-2xl bg-white group">
               <img
-                src={oneCrestPriceSheet}
-                alt="One Crest price detail sheet - Payment schedule Godrej Varanya Kharghar pricing"
+                src={priceSheet}
+                alt=" price detail sheet - Payment schedule Godrej Varanya Kharghar pricing"
                 className="w-full h-full object-cover opacity-80 "
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-transparent transition-colors">

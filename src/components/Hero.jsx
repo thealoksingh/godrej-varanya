@@ -11,15 +11,15 @@ const Hero = ({ onRequestCallBack }) => {
   const images = [
     {
       src: godrejBanner,
-      alt: "One Crest luxury apartments exterior view - Satyam Metro Developers Kharghar",
+      alt: "luxury apartments exterior view - Godrej Varanya",
     },
     {
       src: godrejOutsideView,
-      alt: "One Crest building facade and architecture - Premium residential project Sector 20 Kharghar",
+      alt: "Godrej Varanya exterior building facade and architecture - Premium residential project Sector 20 Kharghar",
     },
     {
       src: godrejVaranyaTopSwimmingPool,
-      alt: "One Crest tower elevation - Satyam Metro luxury development Navi Mumbai",
+      alt: "Godrej Varanya swimming pool top view and building tower elevation Navi Mumbai Kharghar",
     },
   ];
 
@@ -74,7 +74,7 @@ const Hero = ({ onRequestCallBack }) => {
             </h1>
 
             <div className="text-sm text-gray-600">
-              <p className="font-bold">By Satyam Godrej Properties</p>
+              <p className="font-bold">By Godrej Properties</p>
               <p>At Sector 5A, Kharghar-Belpada, Navi Mumbai</p>
             </div>
             <div className="animated-gradient-secondary text-white w-full shadow-lg">

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import oneCrestPoster from "../assets/Poster/one-crest-project-poster.jpeg";
+import projectPoster from "../assets/Poster/one-crest-project-poster.jpeg";
 import Divider from "./Divider";
 
 const Highlight = () => {

@@ -2,27 +2,30 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
-import shitalIcon from "../assets/gifs/shital.gif";
+
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";
-
+import botIcon1 from "../assets/gifs/bot1.gif";
+import botIcon2 from "../assets/gifs/bot2.gif";
+import botIcon3 from "../assets/gifs/bot3.gif";
+import botIcon4 from "../assets/gifs/bot4.gif";
 const randomBot = [
   {
-    name: "Neha Agarwal",
-    image: shitalIcon,
+    name: "Sital",
+    image: botIcon1,
   },
   {
     name: "Priya Sharma",
-    image: shitalIcon,
+    image: botIcon2,
   },
   {
     name: "Madavi Joshi",
-    image: shitalIcon,
+    image: botIcon3,
   },
   {
-    name: "Neelam Patil",
-    image: shitalIcon,
+    name: "Sofia",
+    image: botIcon4,
   },
 ];
 
@@ -580,7 +583,7 @@ Message: ${data.message || `No specific message.My address is: ${window.user_add
             className="fixed lg:bottom-6 bottom-20 right-6 z-50 w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-3xl  border-4 border-white bg-gradient-to-br from-pink-400 to-purple-500"
           >
             <img
-              src={shitalIcon}
+              src={currentBot.image}
               alt="Chat with Neha"
               className="w-12 h-12 object-cover rounded-full"
             />

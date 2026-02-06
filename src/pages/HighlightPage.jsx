@@ -7,8 +7,8 @@ const HighlightPage = () => {
     <>
       <SEO 
         title="About Godrej Varanya | Premium Developer in Kharghar, Navi Mumbai"
-        description="Learn about Satyam Developers, led by CMD Rajesh Gulati. Over two decades of creating residential landmarks like Queens Necklace and Showstopper in Kharghar, Navi Mumbai."
-        keywords="Satyam Developers, Satyam Metro Developers, Rajesh Gulati, real estate Kharghar, property developer Navi Mumbai, Queens Necklace, residential projects"
+        description="Learn about Godrej Properties, a leading real estate developer in India. Discover Godrej Varanya, a premium residential project in Kharghar, Navi Mumbai."
+        keywords="Godrej Properties, Godrej Varanya, real estate Kharghar, property developer Navi Mumbai, premium residential projects"
         canonical="https://godrejkhargar.com/highlight"
       />
       <Highlight />
