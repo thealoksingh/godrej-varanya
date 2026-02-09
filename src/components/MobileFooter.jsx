@@ -24,7 +24,7 @@ const MobileFooter = () => {
             // Track WhatsApp click with gtag
             if (typeof gtag !== 'undefined') {
               gtag('event', 'conversion', {
-                'send_to': 'AW-17844583964/ZmpsCTocuobE2s-rxC',
+                'send_to': 'AW-17844583964/giQ6CM3TnfUbEJz8-rxC',
                 'value': 1.0,
                 'currency': 'INR',
                 'event_callback': function() {
