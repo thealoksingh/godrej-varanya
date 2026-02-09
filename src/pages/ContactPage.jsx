@@ -88,13 +88,17 @@ const ContactPage = ({ onRequestCallBack }) => {
       }
 
       if (backendSuccess || emailSuccess) {
-        if (typeof gtag !== "undefined") {
-          gtag("event", "conversion", {
-            send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
-            value: 1.0,
-            currency: "INR",
-          });
-        }
+          // Track conversion with gtag
+      if (typeof gtag !== "undefined") {
+        gtag("event", "conversion", {
+          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+          // value: 1.0,
+          // currency: "INR",
+          event_callback: function () {
+            console.log("Chatbot form conversion tracked");
+          },
+        });
+      }
         setShowSuccessAlert(true);
         setFormData({ name: "", mobile: "", source: "godrejkhargar.com" });
         setConsent(false);

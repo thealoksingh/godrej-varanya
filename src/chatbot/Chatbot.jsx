@@ -217,14 +217,16 @@ Message: ${data.message || `No specific message.My address is: ${window.user_add
       // Track conversion with gtag
       if (typeof gtag !== "undefined") {
         gtag("event", "conversion", {
-          send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
-          value: 1.0,
-          currency: "INR",
+          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+          // value: 1.0,
+          // currency: "INR",
           event_callback: function () {
             console.log("Chatbot form conversion tracked");
           },
         });
       }
+
+     
       setSubmissionSuccess(true);
       await simulateBotTyping(
         `Perfect! ✨ I've received your details. Our team will contact you shortly. Thank you for choosing Godrej Varanya! 🎉`,

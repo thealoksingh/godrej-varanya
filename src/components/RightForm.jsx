@@ -133,17 +133,17 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
 
       // 3️⃣ Show result
       if (backendSuccess || emailSuccess) {
-        // Track conversion with gtag
-        if (typeof gtag !== "undefined") {
-          gtag("event", "conversion", {
-            send_to: "AW-17844583964/ZmpsCTocuobE2s-rxC",
-            value: 1.0,
-            currency: "INR",
-            event_callback: function () {
-              console.log("Right form conversion tracked");
-            },
-          });
-        }
+         // Track conversion with gtag
+      if (typeof gtag !== "undefined") {
+        gtag("event", "conversion", {
+          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+          // value: 1.0,
+          // currency: "INR",
+          event_callback: function () {
+            console.log("Chatbot form conversion tracked");
+          },
+        });
+      }
         setShowSuccessAlert(true);
         setFormData({
           name: "",
