@@ -12,7 +12,7 @@ export const emailKeys = {
 export const credentials={
   web_url: "godrejkhargar.com",
   web_name: "Godrej Varanya Kharghar",
-  logo_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1npNt53HoKFm9ngdtacVVTo2VGLK4eXKVPQ&s",
+  logo_url: "https://godrejkhargar.com/android-chrome-512x512.png",
 }
 
 export const regexPatterns = {
@@ -24,7 +24,7 @@ export const regexPatterns = {
 export let user_address = null;
 
 // export const baseurl = "http://localhost:3001/api";
-export const baseurl = "https://api.satyammetroshowstoppers.in/api";
-// export const baseurl = import.meta.env.VITE_BASE_API_URL;
+// export const baseurl = "https://api.satyammetroshowstoppers.in/api";
+export const baseurl = import.meta.env.VITE_BASE_API_URL;
 
 // chatbot.js ,BrochureForm.jsx,InterestForm.jsx,MobileForm.jsx,offerForm.jsx,RightForm.jsx
