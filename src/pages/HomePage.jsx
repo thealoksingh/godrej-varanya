@@ -124,7 +124,10 @@ const HomePage = () => {
     
       {/* <NRIServices /> */}
     
-      <MobileFooter />
+      <MobileFooter  onRequestCallBack={() => {
+          setIsInterestFormOpen(true);
+          setFormMode("Get Detail About Varanya");
+        }} />
     </>
   );
 };

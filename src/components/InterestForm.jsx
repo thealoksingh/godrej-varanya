@@ -291,14 +291,14 @@ const InterestForm = ({ onClose, mode }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="animated-gradient animated-border text-white font-semibold text:sm px-16 w-68 py-2 rounded-lg shadow-lg hover:brightness-110 active:scale-95"
+                className="animated-gradient animated-border text-white font-semibold text:sm px-16 w-full py-2 rounded-lg shadow-lg hover:brightness-110 active:scale-95"
               >
                 {loading ? "Submitting..." : "Submit"}
               </button>
-              <p className="text-center m-2">OR</p>
+              {/* <p className="text-center m-2">OR</p> */}
             </div>
           </form>
-          <a
+          {/* <a
             href={`https://wa.me/${
               contactConfig.phoneNumber
             }?text=${encodeURIComponent(contactConfig.whatsappMessage)}`}
@@ -323,7 +323,7 @@ const InterestForm = ({ onClose, mode }) => {
               <img src={whatsappAnimIcon} alt="WhatsApp" className="w-6 h-6" />
               Connect On Whatsapp
             </button>
-          </a>
+          </a> */}
         </div>
       </div>
     </div>

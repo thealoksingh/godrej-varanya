@@ -186,7 +186,8 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             />
             <p className="font-semibold text-sm">
               {" "}
-              {contactConfig.displayPhone}
+              Get a Call
+              {/* {contactConfig.displayPhone} */}
             </p>
           </div>
         </div>
@@ -368,7 +369,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           </div>
         </div>
       </div>
-      <div className="mt-auto p-6 ">
+       {/* <div className="mt-auto p-6 ">
         <a
           href={`https://wa.me/${
             contactConfig.phoneNumber
@@ -394,7 +395,7 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
             <img src={whatsappAnimIcon} alt="WhatsApp" className="w-12 h-12" />
           </div>
         </a>
-      </div>
+       </div> */}
     </div>
   );
 };
