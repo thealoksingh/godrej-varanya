@@ -3,12 +3,16 @@ import { Autoplay, Pagination } from "swiper/modules";
 import godrejBanner from "../assets/godrej-homeBanner.png";
 import godrejOutsideView from "../assets/godrej-outsideView.png";
 import godrejVaranyaTopSwimmingPool from "../assets/godrej-topSwimmigPool.png";
-
+import buildingImage from "../assets/building-image.png";
 import "swiper/css";
 import "swiper/css/pagination";
 
 const Hero = ({ onRequestCallBack }) => {
   const images = [
+    {
+      src: buildingImage,
+      alt: "Godrej Varanya Building Exterior View",
+    },
     {
       src: godrejBanner,
       alt: "luxury apartments exterior view - Godrej Varanya",
