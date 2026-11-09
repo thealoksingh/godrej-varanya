@@ -64,7 +64,7 @@ const Footer = () => {
       </div>
 
       <div className="bg-black flex justify-center items-center h-10 rounded-b-lg text-white text-[12px]">
-        <p>All Rights Reserved. © 2026 PropSolutions4U Pvt. Ltd.</p>
+        <p>All Rights Reserved. © 2026</p>
       </div>
     </footer>
   );
