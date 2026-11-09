@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import PublicLayout from "./layouts/PublicLayout";
@@ -13,13 +12,28 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
-
-          <Route path="/highlight" element={<Navigate to="/#highlights" replace />} />
+          <Route path="/about" element={<Navigate to="/#about" replace />} />
+          <Route
+            path="/highlight"
+            element={<Navigate to="/#highlights" replace />}
+          />
           <Route path="/price" element={<Navigate to="/#price" replace />} />
-          <Route path="/amenities" element={<Navigate to="/#amenities" replace />} />
-          <Route path="/floorplan" element={<Navigate to="/#floorplan" replace />} />
-          <Route path="/location" element={<Navigate to="/#location" replace />} />
-          <Route path="/gallery" element={<Navigate to="/#gallery" replace />} />
+          <Route
+            path="/amenities"
+            element={<Navigate to="/#amenities" replace />}
+          />
+          <Route
+            path="/floorplan"
+            element={<Navigate to="/#floorplan" replace />}
+          />
+          <Route
+            path="/location"
+            element={<Navigate to="/#location" replace />}
+          />
+          <Route
+            path="/gallery"
+            element={<Navigate to="/#gallery" replace />}
+          />
 
           <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />

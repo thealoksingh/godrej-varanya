@@ -17,6 +17,7 @@ import AmenitiesPage from "./AmenitiesPage";
 import GalleryPage from "./GalleryPage";
 import ContactPage from "./ContactPage";
 import LowerAboutSection from "./LowerAboutSection";
+import GodrejVideo from "../components/GodrejVideo";
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds
@@ -110,6 +111,8 @@ const HomePage = () => {
         <AmenitiesPage />
 
         <GalleryPage />
+        
+        <GodrejVideo/>
         <Location
           onRequestCallBack={() => {
             setIsInterestFormOpen(true);

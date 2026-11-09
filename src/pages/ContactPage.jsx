@@ -17,6 +17,7 @@ import {
   messageTemplates,
 } from "../key/messageUtils";
 import axios from "axios";
+import { apiPostRequest } from "../utils/api/post";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -61,112 +62,137 @@ const ContactPage = () => {
     return Object.keys(validationErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    setShowSuccessAlert(false);
-    setShowFailureAlert(false);
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+  setShowSuccessAlert(false);
+  setShowFailureAlert(false);
 
-    const submissionData = {
-      ...formData,
-      name: formData.name.trim(),
-      mobile: cleanedMobile,
+  const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+
+  const submissionData = {
+    ...formData,
+    name: formData.name.trim(),
+    mobile: cleanedMobile,
+  };
+
+  if (!validateForm(submissionData)) return;
+
+  setLoading(true);
+
+  let backendSuccess = false;
+  let emailSuccess = false;
+
+  try {
+    const backendMessage = createMessageWithAddress(
+      messageTemplates.general,
+      submissionData.name
+    );
+
+    const emailMessage = createMessageWithAddress(
+      messageTemplates.general,
+      submissionData.name
+    );
+
+    const finalData = {
+      ...submissionData,
+      message: backendMessage,
     };
 
-    if (!validateForm(submissionData)) return;
-
-    setLoading(true);
-
-    let backendSuccess = false;
-    let emailSuccess = false;
-
+    // 1️⃣ Backend submission
     try {
-      const backendMessage = createMessageWithAddress(
-        messageTemplates.general,
-        submissionData.name
-      );
-
-      const emailMessage = createMessageWithAddress(
-        messageTemplates.general,
-        submissionData.name
-      );
-
-      const finalData = {
-        ...submissionData,
-        message: backendMessage,
+      const contactRequestData = {
+        name: submissionData.name,
+        mobileNumber: cleanedMobile,
+        email: "",
+        remark: backendMessage,
+        source: "MANUAL",
+        status: "NEW",
+        propertyName: "Godrej Varanya",
       };
 
-      // Backend submission
-      try {
-        const response = await axios.post(
-          `${baseurl}/forms/submit`,
-          finalData
-        );
+      const response = await apiPostRequest({
+        apiUrl: "/contact-requests",
+        content_type: "application/json",
+        data: contactRequestData,
+      });
 
-        if (response.status === 200 || response.status === 201) {
-          backendSuccess = true;
-        }
-      } catch (error) {
-        console.error("Backend submission failed:", error);
+      if (response.status === 200 || response.status === 201) {
+        backendSuccess = true;
       }
 
-      // EmailJS submission
-      try {
-        await emailjs.send(
-          emailKeys.serviceId,
-          emailKeys.templateId,
-          {
-            user_name: submissionData.name,
-            user_phone: submissionData.mobile,
-            user_email: "Not Provided",
-            web_url: credentials.web_url,
-            web_name: credentials.web_name,
-            logo_url: credentials.logo_url,
-            message: emailMessage,
-          },
-          emailKeys.publicKey
-        );
-
-        emailSuccess = true;
-      } catch (error) {
-        console.error("Email submission failed:", error);
-      }
-
-      if (backendSuccess || emailSuccess) {
-        // Google Ads conversion tracking
-        if (typeof window !== "undefined" && typeof window.gtag === "function") {
-          window.gtag("event", "conversion", {
-            send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
-          });
-        }
-
-        setShowSuccessAlert(true);
-
-        setFormData({
-          name: "",
-          mobile: "",
-          source: "godrejkhargar.com",
-        });
-
-        setConsent(false);
-
-        setErrors({
-          name: "",
-          mobile: "",
-          consent: "",
-        });
-      } else {
-        setShowFailureAlert(true);
-      }
     } catch (error) {
-      console.error("Form submission error:", error);
-      setShowFailureAlert(true);
-    } finally {
-      setLoading(false);
+      console.error("Backend submission failed:", error);
+      console.error("Backend response:", error.response?.data);
+      console.error("Status code:", error.response?.status);
     }
-  };
+
+    // 2️⃣ EmailJS submission
+    try {
+      await emailjs.send(
+        emailKeys.serviceId,
+        emailKeys.templateId,
+        {
+          user_name: submissionData.name,
+          user_phone: submissionData.mobile,
+          user_email: "Not Provided",
+          web_url: credentials.web_url,
+          web_name: credentials.web_name,
+          logo_url: credentials.logo_url,
+          message: emailMessage,
+        },
+        emailKeys.publicKey
+      );
+
+      emailSuccess = true;
+
+    } catch (error) {
+      console.error("Email submission failed:", error);
+    }
+
+    // 3️⃣ Show result
+    if (backendSuccess || emailSuccess) {
+
+      // Google Ads conversion tracking
+      if (
+        typeof window !== "undefined" &&
+        typeof window.gtag === "function"
+      ) {
+        window.gtag("event", "conversion", {
+          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+        });
+      }
+
+      setShowSuccessAlert(true);
+
+      setFormData({
+        name: "",
+        mobile: "",
+        source: "godrejkhargar.com",
+      });
+
+      setConsent(false);
+
+      setErrors({
+        name: "",
+        mobile: "",
+        consent: "",
+      });
+
+    } else {
+      setShowFailureAlert(true);
+    }
+
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setShowFailureAlert(true);
+
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <section

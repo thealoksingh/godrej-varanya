@@ -23,19 +23,19 @@ const Header = ({ onBrochureClick }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
 
-  const navLinks = [
-    {
-      name: "Highlights",
-      section: "highlight",
-      path: "/highlight",
-      icon: <CircleCheckBig size={18} />,
+  const navLinks = [  {
+      name: "About",
+      section: "about",
+      path: "/about",
+      icon: <Info size={18} />,
     },
-    //  {
-    //   name: "About",
-    //   section: "about",
-    //   path: "/about",
-    //   icon: <Info size={18} />,
+    // {
+    //   name: "Highlights",
+    //   section: "highlight",
+    //   path: "/highlight",
+    //   icon: <CircleCheckBig size={18} />,
     // },
+   
     {
       name: "Pricing",
       section: "price",
@@ -43,7 +43,7 @@ const Header = ({ onBrochureClick }) => {
       icon: <IndianRupee size={18} />,
     },
     {
-      name: "Floor Plan",
+      name: "Floor",
       section: "floorplan",
       path: "/floorplan",
       icon: <Building2 size={18} />,
@@ -140,7 +140,7 @@ const Header = ({ onBrochureClick }) => {
             <div
               key={link.name}
               onClick={() => handleNavClick(link.section, link.path)}
-              className={`relative flex items-center gap-2 cursor-pointer px-4 py-2 
+              className={`relative flex items-center gap-2 cursor-pointer px-2 py-2 
     transition-all duration-300
     ${
       isActive(link.section)

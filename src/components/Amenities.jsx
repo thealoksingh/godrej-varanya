@@ -4,15 +4,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
 
-import kidsPlayArea from "../assets/Amenities/Kids Play Area.webp";
-import swimmingpool from "../assets/Amenities/Swimming Pool.webp";
-import clubHouse from "../assets/Amenities/Clubhouse.webp";
-import gardens from "../assets/Amenities/landcape-garden.webp";
-import gymnasium from "../assets/Amenities/Gymnasium.webp";
-import security from "../assets/Amenities/security.webp";
+import kidsPlayArea from "../assets/Amenities/kids-garden.jpg";
+import swimmingpool from "../assets/Amenities/warm-swimming-pool.jpg";
+import clubHouse from "../assets/Amenities/Clubhouse.jpg";
+import gardens from "../assets/Amenities/landcape-garden.jpg";
+import gymnasium from "../assets/Amenities/Gymnasium.jpg";
+import security from "../assets/Amenities/security.png";
+import multiPurposeArea from "../assets/Amenities/multiPurposeArea.jpg";
+import spa from "../assets/Amenities/spa.jpg";
 import Divider from "./Divider";
 
 const amenities = [
+  {
+    id: "swimming-pool",
+    title: "Temp Control Swimming Pool",
+    img: swimmingpool,
+    alt: "Swimming pool amenity at Godrej Varanya",
+  },
   {
     id: "security",
     title: "24x7 Security",
@@ -27,15 +35,9 @@ const amenities = [
   },
   {
     id: "gardens",
-    title: "Landscaped Gardens",
+    title: "Tropical Garden",
     img: gardens,
     alt: "Landscaped green gardens at Godrej Varanya Kharghar",
-  },
-  {
-    id: "swimming-pool",
-    title: "Swimming Pool",
-    img: swimmingpool,
-    alt: "Swimming pool amenity at Godrej Varanya",
   },
   {
     id: "kids-play-area",
@@ -48,6 +50,18 @@ const amenities = [
     title: "Clubhouse",
     img: clubHouse,
     alt: "Clubhouse facilities at Godrej Varanya Kharghar",
+  },
+   {
+    id: "spa",
+    title: "SPA & Wellness Center",
+    img: spa,
+    alt: "Spa and Wellness Care In Society at Godrej Varanya",
+  },
+  {
+    id: "multipurpose-court",
+    title: "multipurpose court",
+    img: multiPurposeArea,
+    alt: "Multipurpose court for sports and activities at Godrej Varanya",
   },
 ];
 

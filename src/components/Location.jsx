@@ -1,253 +1,368 @@
-
-import React, { useState } from "react";
-import { contactConfig } from "../config/credential";
-import godrejVaranyaTopSwimmingPool from "../assets/godrej-topSwimmigPool.png";
-import Divider from "./Divider";
-import { MapPin } from "lucide-react";
-
-import connectivity from "../assets/gifs/Connectivity.gif";
-import education from "../assets/gifs/Education.gif";
-import healthcare from "../assets/gifs/Healthcare.gif";
-import MallShopping from "../assets/gifs/Mall.gif";
-import techpark from "../assets/gifs/Tech.gif";
-import Recreation from "../assets/gifs/Hotel.gif";
-
-const locationData = [
+import React from "react";
+import {
+  FiMapPin,
+  FiNavigation,
+  FiTrendingUp,
+  FiBriefcase,
+  FiShoppingBag,
+  FiBookOpen,
+  FiHeart,
+  FiClock,
+} from "react-icons/fi";
+import flightIcon from "../assets/flightIcon.png";
+import Map from "./Map";
+const locationGroups = [
   {
-    category: "Connectivity",
-    items: [
-      "Kharghar Railway Station – 2 Min",
-      "Utsav Chowk Metro Station – 2 Min",
-      "CBD Belapur – 5 Mins",
-      "Navi Mumbai International Airport – 14 Mins",
-      "Sion–Panvel Highway (Kharghar) – 2 Min",
-      "Mumbai–Pune Expressway (Kalamboli) – 5 Mins",
-      "Central Park Kharghar – 5 Mins",
-      "Taloja MIDC – 15 Mins",
-      "Mumbai–Goa Highway (Palaspe Phata) – 15 Mins",
+    title: "Effortless Connectivity",
+    icon: FiNavigation,
+    places: [
+      ["Sion-Panvel Highway", "1 min"],
+      ["Utsav Chowk Metro Station", "2 min"],
+      ["Kharghar Railway Station", "5 min"],
+      ["Navi Mumbai Intl. Airport", "16 min"],
     ],
-    icon: connectivity,
   },
   {
-    category: "Education Hub",
-    items: [
-      "National Institute of Fashion Technology (NIFT) – 2 Mins",
-      "AC Patil College of Engineering – 3 Mins",
-      "Apeejay School – 5 Mins",
-      "Radcliffe School – 5 Mins",
-      "Ryan International School – 8 Mins",
-      "Bal Bharati Public School – 3 Mins",
-      "Institute of Technology & Mgmt (ITM) – 4 Mins",
-      "ITM Business School – 5 Mins",
-      "YMT College of Management – 2 Mins",
-      "DAV International School – 8 Mins",
+    title: "Educational Institutes",
+    icon: FiBookOpen,
+    places: [
+      ["Bharati Vidyapeeth University", "2 min"],
+      ["National Institute of Fashion Technology", "3 min"],
+      ["VIBGYOR High School", "9 min"],
+      ["DY Patil University", "12 min"],
     ],
-    icon: education,
   },
   {
-    category: "Healthcare",
-    items: [
-      "MGM Hospital, Kharghar – 5 Mins",
-      "Tata Memorial Hospital, Kharghar – 8 Mins",
-      "Apollo Hospital, Navi Mumbai – 15 Mins",
-      "Medicover Hospital – 5 Mins",
-      "Matushree Gomati Hospital – 8 Mins",
+    title: "Hospitals",
+    icon: FiHeart,
+    places: [
+      ["MITR Hospital", "4 min"],
+      ["Medicover Hospital", "8 min"],
+      ["Tata Memorial Hospital", "8 min"],
+      ["Geo Medcare Satyam Multispeciality Hospital", "9 min"],
     ],
-    icon: healthcare,
   },
   {
-    category: "Mall & Shopping",
-    items: [
-      "Glomax Mall – 4 Mins",
-      "Royal Tulip Hotel – 5 Mins",
-      "K Star Mall, CBD Belapur – 10 Mins",
-      "ISKCON Temple – 5 Mins",
-      "D-Mart – 10 Mins",
-      "Little World Mall – 5 Mins",
-      "Four Points by Sheraton, Navi Mumbai – 15 Mins",
-      "Reliance Smart Superstore – 5 Mins",
-      "The Park Hotel, CBD Belapur – 10 Mins",
-      "Seawoods Grand Central Mall – 15 Mins",
-      "Inorbit Mall, Vashi – 25 Mins",
+    title: "Other Attractions",
+    icon: FiMapPin,
+    places: [
+      ["Kharghar Central Park", "4 min"],
+      ["Kharghar Valley Golf Course", "5 min"],
+      ["Taloja Creek", "9 min"],
+      ["Pandavkada Waterfall", "20 min"],
     ],
-    icon: MallShopping,
   },
   {
-    category: "Tech Park",
-    items: [
-      "BKC 2 (Proposed Business Hub) – 2 Mins",
-      "Vashi Tech Park – 16 Mins",
-      "Belapur Station Complex – 10 Mins",
-      "Turbhe MIDC – 22 Mins",
-      "Millennium Business Park, Airoli – 30 Mins",
+    title: "Curated Retail & Shopping",
+    icon: FiShoppingBag,
+    places: [
+      ["Little World Mall", "6 min"],
+      ["Shree Krishna Paradise Shopping Zone", "6 min"],
+      ["Nexus Seawoods", "15 min"],
+      ["Paradise Mall", "15 min"],
     ],
-    icon: techpark,
   },
   {
-    category: "Recreation",
-    items: [
-      "150-Acre Kharghar Golf Course – 2 Mins",
-      "Mumbai's Largest Central Park – 2 Mins",
-      "DY Patil Stadium – 5 Mins",
+    title: "Corporate Hubs",
+    icon: FiBriefcase,
+    places: [
+      ["CIDCO International Corporate Park (BKC 2.0)", "6 min"],
+      ["Vishwaroop IT Park", "16 min"],
+      ["Reliance Corporate Park", "24 min"],
+      ["Mindspace Business Park, Airoli", "30 min"],
     ],
-    icon: Recreation,
   },
 ];
 
-const Location = ({ onRequestCallBack }) => {
-  const [selectedCategory, setSelectedCategory] = useState("Connectivity");
+const growthHighlights = [
+  {
+    number: "01",
+    title: "NMIA: Your Gateway to the World",
+    icon: FiNavigation,
+    description:
+      "Just approximately 16 minutes* from Navi Mumbai International Airport (NMIA), offering domestic and international connectivity while supporting economic growth through increased investments and large-scale job creation.",
+  },
+  {
+    number: "02",
+    title: "Upcoming NAINA: Shaping the Next Phase of Growth",
+    icon: FiTrendingUp,
+    description:
+      "Spread across approximately 225+ million sq. m., NAINA City (Navi Mumbai Airport Influence Notified Area) is a CIDCO-planned city, supported by ₹6,600+ crore in infrastructure investment.",
+  },
+  {
+    number: "03",
+    title: "Upcoming BKC 2.0: Navi Mumbai's Next Business Hub",
+    icon: FiBriefcase,
+    description:
+      "CIDCO's International Corporate Park (ICP), spread across approximately 1.4–1.6 million sq. m. (345–385 acres), is envisioned as a major corporate destination attracting enterprises, talent and investment.",
+  },
+  {
+    number: "04",
+    title: "Upcoming Kharghar Coastal Road",
+    icon: FiMapPin,
+    description:
+      "The proposed 9.5 km Kharghar Coastal Road along Navi Mumbai's waterfront is planned to strengthen connectivity between Kharghar, Belapur and Nerul while improving airport access.",
+  },
+  {
+    number: "05",
+    title: "Upcoming Kharghar–Turbhe Link Road",
+    icon: FiNavigation,
+    description:
+      "This proposed corridor aims to improve connectivity between South and North Navi Mumbai, with the stated travel time expected to reduce from approximately 40 minutes to 10 minutes.",
+  },
+];
 
-  const latitude = contactConfig.propertyLocation.latitude;
-  const longitude = contactConfig.propertyLocation.longitude;
-
-  const mapUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed`;
-
-  const directionsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-
-  const selectedData = locationData.find(
-    (data) => data.category === selectedCategory
-  );
-
+const Location = () => {
   return (
     <section
       id="location"
-      className="bg-[#EFEBEB] py-4 px-2 max-w-7xl mx-auto mt-4"
+      className="w-full overflow-hidden bg-white"
       aria-labelledby="location-heading"
     >
-      <div className="mb-1">
-        <h2
-          id="location-heading"
-          className="text-2xl lg:text-3xl font-semibold text-center text-[var(--clr-p)] mb-3"
-        >
-          Godrej Varanya Location Advantage
-        </h2>
+      
+      {/* Nearby Locations */}
+      <div className="px-4 py-16 sm:px-8 sm:py-20 lg:px-16">
+        <div className="mx-auto max-w-7xl">
 
-        <Divider />
-      </div>
-
-      {/* Map */}
-      <div className="relative w-full mb-4 h-[350px] lg:h-[500px] mt-8 rounded-2xl overflow-hidden shadow-lg">
-        <iframe
-          title="Map showing Godrej Varanya location in Kharghar, Navi Mumbai"
-          src={mapUrl}
-          className="w-full h-full border-0"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent pointer-events-none" />
-
-        <a
-          href={directionsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Open Godrej Varanya location on Google Maps"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full z-10"
-        >
-          <div className="relative flex items-center justify-center">
-            <span className="absolute w-20 h-20 rounded-full bg-[var(--clr-p)]/30 animate-ping" />
-
-            <div className="w-16 h-16 rounded-full overflow-hidden border-4 border-[var(--clr-p)] shadow-xl">
-              <img
-                src={godrejVaranyaTopSwimmingPool}
-                alt="Swimming pool at Godrej Varanya"
-                loading="lazy"
-                decoding="async"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-        </a>
-
-        <div className="absolute bottom-4 left-4 right-4 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md rounded-xl shadow-2xl p-4 z-20">
-          <p className="font-semibold text-lg">Godrej Varanya</p>
-          <p className="text-sm text-gray-600">Kharghar, Navi Mumbai</p>
-
-          <a
-            href={directionsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block mt-2 text-sm font-semibold text-[var(--clr-p)] hover:underline"
-          >
-            Get Directions →
-          </a>
-        </div>
-      </div>
-
-      {/* Location Categories */}
-      <div>
-        <div
-          className="grid grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-2"
-          role="group"
-          aria-label="Nearby location categories"
-        >
-          {locationData.map((data) => (
-            <button
-              type="button"
-              key={data.category}
-              onClick={() => setSelectedCategory(data.category)}
-              aria-pressed={selectedCategory === data.category}
-              className={`p-2 flex lg:flex-row flex-col items-center justify-center gap-2
-                rounded-sm lg:rounded-xl border-2 transition-all
-                lg:rounded-bl-none lg:rounded-br-none lg:border-b-0
-                ${
-                  selectedCategory === data.category
-                    ? "animated-gradient text-white"
-                    : "bg-gray-100 border-[var(--clr-p)] text-[var(--clr-p)]"
-                }`}
+          {/* Heading */}
+          <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+            <span
+              className="mb-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em]"
+              style={{ color: "var(--clr-p)" }}
             >
-              <img
-                src={data.icon}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                className={`w-8 h-8 ${
-                  selectedCategory === data.category
-                    ? "filter brightness-0 invert"
-                    : ""
-                }`}
-              />
+              <FiMapPin />
+              Location Advantage
+            </span>
 
-              <span className="font-semibold text-sm">
-                {data.category}
+            <h2
+              id="location-heading"
+              className="text-3xl font-semibold leading-tight text-[#20251A] sm:text-4xl lg:text-5xl"
+            >
+              Everything Closer.
+              <span
+                className="block mt-1"
+                style={{ color: "var(--clr-p)" }}
+              >
+                Life Made Easier.
               </span>
-            </button>
-          ))}
-        </div>
+            </h2>
 
-        <div className="border-2 bg-gray-100 border-[var(--clr-p)] lg:mt-0 mt-2">
-          {selectedData && (
-            <div className="p-4">
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                {selectedData.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-sm"
-                  >
-                    <MapPin
-                      size={18}
-                      className="shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+            <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#777B70] sm:text-base">
+              Experience the convenience of a well-connected address,
+              surrounded by educational institutions, healthcare,
+              entertainment, shopping and emerging business destinations.
+            </p>
+          </div>
 
-        <div className="flex justify-center p-4">
-          <button
-            type="button"
-            onClick={onRequestCallBack}
-            className="animated-gradient flex items-center gap-2 animated-border text-white px-12 py-2.5 rounded-lg text-sm shadow-md hover:opacity-90"
-          >
-            Request Location Detail
-          </button>
+          {/* Location Cards */}
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {locationGroups.map((group, index) => {
+              const Icon = group.icon;
+
+              return (
+                <article
+                  key={group.title}
+                  className="group relative overflow-hidden border border-[#E8EBDD] bg-[#FAFBF7] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#6b8d14]/40 hover:shadow-xl sm:p-7"
+                >
+                  {/* Decorative background */}
+                  <div
+                    className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full opacity-[0.06] transition-transform duration-500 group-hover:scale-150"
+                    style={{ backgroundColor: "var(--clr-p)" }}
+                  />
+
+                  <div className="relative">
+                    <div className="mb-6 flex items-center justify-between">
+                      <div
+                        className="flex h-12 w-12 items-center justify-center"
+                        style={{
+                          backgroundColor: "rgba(107,141,20,0.10)",
+                          color: "var(--clr-p)",
+                        }}
+                      >
+                        <Icon size={22} />
+                      </div>
+
+                      <span className="text-xs font-medium tracking-widest text-[#A2A69A]">
+                        0{index + 1}
+                      </span>
+                    </div>
+
+                    <h3 className="mb-5 text-lg font-semibold text-[#25291F] sm:text-xl">
+                      {group.title}
+                    </h3>
+
+                    <div className="space-y-0">
+                      {group.places.map(([place, time]) => (
+                        <div
+                          key={place}
+                          className="flex items-start justify-between gap-3 border-t border-[#E7E9E0] py-3.5"
+                        >
+                          <span className="text-[13px] leading-5 text-[#666B60] sm:text-sm">
+                            {place}
+                          </span>
+
+                          <span
+                            className="flex shrink-0 items-center gap-1.5 whitespace-nowrap text-xs font-semibold sm:text-sm"
+                            style={{ color: "var(--clr-p)" }}
+                          >
+                            <FiClock size={13} />
+                            {time}*
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="mt-6 text-center text-[11px] leading-5 text-[#999D93]">
+            *Approximate travel times. Actual journey times may vary
+            depending on traffic and route conditions.
+          </p>
         </div>
       </div>
+
+      {/* NMIA Highlight */}
+      <div className="px-4 pb-16 sm:px-8 sm:pb-20 lg:px-16">
+        <div
+          className="relative mx-auto max-w-7xl overflow-hidden px-6 py-10 sm:px-10 sm:py-14 lg:px-16 lg:py-16"
+          style={{
+            background:
+              "linear-gradient(115deg, var(--clr-p), #425B0B 75%, #34470A)",
+          }}
+        >
+          <div className="pointer-events-none absolute -right-20 -top-32 h-80 w-80 rounded-full border border-white/10" />
+          <div className="pointer-events-none absolute -right-10 -top-20 h-60 w-60 rounded-full border border-white/10" />
+
+          <div className="relative grid items-center gap-8 md:grid-cols-[1fr_auto]">
+            <div className="max-w-3xl">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-white/70">
+                Global Access. Local Advantage.
+              </span>
+
+              <h3 className="mt-4 text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
+                Find Global Access, With NMIA Just 16 Minutes Away.*
+              </h3>
+
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
+                Enjoy convenient access to the world with Navi Mumbai
+                International Airport (NMIA), approximately 16 minutes
+                away*. Its domestic and international connections further
+                strengthen Kharghar's position as an emerging destination
+                in Navi Mumbai.
+              </p>
+            </div>
+
+            <div className="flex h-24 w-24 shrink-0 items-center justify-center border border-white/30 sm:h-32 sm:w-32">
+  <img
+    src={flightIcon}
+    alt="Airplane"
+    className="h-14 w-14 object-contain sm:h-20 sm:w-20"
+    loading="lazy"
+  />
+</div>
+          </div>
+
+          <div className="relative mt-9 flex items-center gap-3 border-t border-white/20 pt-5 text-xs text-white/70">
+            <FiMapPin />
+            <span>Navi Mumbai International Airport</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Future Growth */}
+      <div className="bg-[#F6F8F1] px-4 py-16 sm:px-8 sm:py-20 lg:px-16">
+        <div className="mx-auto max-w-7xl">
+
+          {/* Growth Heading */}
+          <div className="mb-12 grid gap-6 md:grid-cols-2 md:items-end">
+            <div>
+              <span
+                className="text-xs font-bold uppercase tracking-[0.25em]"
+                style={{ color: "var(--clr-p)" }}
+              >
+                The Future of Kharghar
+              </span>
+
+              <h3 className="mt-4 text-3xl font-semibold leading-tight text-[#20251A] sm:text-4xl lg:text-5xl">
+                An Address of Today.
+                <span
+                  className="block"
+                  style={{ color: "var(--clr-p)" }}
+                >
+                  An Opportunity for Tomorrow.
+                </span>
+              </h3>
+            </div>
+
+            <p className="text-sm leading-7 text-[#777B70] sm:text-base md:pb-1">
+              Kharghar is emerging as an important growth destination,
+              supported by planned infrastructure, expanding business
+              districts and enhanced regional connectivity. Upcoming
+              developments are expected to shape the area's future.
+            </p>
+          </div>
+
+          {/* Growth Highlights */}
+          <div className="grid gap-0 border-y border-[#DDE3D2] md:grid-cols-2">
+            {growthHighlights.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <article
+                  key={item.number}
+                  className={`group border-b border-[#DDE3D2] p-6 transition-colors duration-300 hover:bg-white sm:p-8 ${
+                    index % 2 === 0
+                      ? "md:border-r"
+                      : ""
+                  } ${index === growthHighlights.length - 1 ? "md:col-span-2 md:border-r-0" : ""}`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div
+                      className="flex h-11 w-11 shrink-0 items-center justify-center"
+                      style={{
+                        backgroundColor: "rgba(107,141,20,0.10)",
+                        color: "var(--clr-p)",
+                      }}
+                    >
+                      <Icon size={21} />
+                    </div>
+
+                    <span
+                      className="text-3xl font-light"
+                      style={{ color: "rgba(107,141,20,0.35)" }}
+                    >
+                      {item.number}
+                    </span>
+                  </div>
+
+                  <h4 className="mt-6 max-w-xl text-lg font-semibold leading-snug text-[#25291F] sm:text-xl">
+                    {item.title}
+                  </h4>
+
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-[#777B70]">
+                    {item.description}
+                  </p>
+
+                  <div
+                    className="mt-5 h-[2px] w-10 transition-all duration-300 group-hover:w-20"
+                    style={{ backgroundColor: "var(--clr-p)" }}
+                  />
+                </article>
+              );
+            })}
+          </div>
+
+          <p className="mt-6 text-[11px] leading-5 text-[#92978A]">
+            Infrastructure projects, proposed developments, distances
+            and timelines are subject to the respective authorities'
+            plans, approvals and updates.
+          </p>
+        </div>
+      </div>
+      <Map/>
     </section>
   );
 };

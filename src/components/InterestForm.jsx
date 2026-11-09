@@ -8,10 +8,10 @@ import {
   createMessageWithAddress,
   messageTemplates,
 } from "../key/messageUtils";
-import { contactConfig } from "../config/credential";
 import axios from "axios";
 import logo from "../assets/godrejLogo.png";
-import whatsappAnimIcon from "../assets/gifs/whatsappAnim.gif";
+import { apiPostRequest } from "../utils/api/post";
+import brochurePdf from "../assets/Godrej_Varanya_Kharghar_Brochure.pdf";
 const InterestForm = ({ onClose, mode }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -54,113 +54,155 @@ const InterestForm = ({ onClose, mode }) => {
     formHeader = "Download Brochure";
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setShowSuccessAlert(false);
-    setShowFailureAlert(false);
+ 
 
-    // Prepare dynamic message based on mode
-    let messageTemplate = messageTemplates.general;
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setShowSuccessAlert(false);
+  setShowFailureAlert(false);
 
-    if (mode === "callback") {
-      messageTemplate = messageTemplates.callback;
-    } else if (mode === "brochure" || mode === "download brochure") {
-      messageTemplate = messageTemplates.brochure;
-    }
+  // Prepare dynamic message based on mode
+  let messageTemplate = messageTemplates.general;
 
-    const backendMessage = createMessageWithAddress(
-      messageTemplate,
-      formData.name,
-    );
-    const emailMessage = createMessageWithAddress(
-      messageTemplate,
-      formData.name,
-    );
+  if (mode === "callback") {
+    messageTemplate = messageTemplates.callback;
+  } else if (
+    mode === "brochure" ||
+    mode === "download brochure"
+  ) {
+    messageTemplate = messageTemplates.brochure;
+  }
 
-    // console.log("Using backend message template for mode:", backendMessage);
-    //  console.log("Using email message template for mode:", emailMessage);
+  const backendMessage = createMessageWithAddress(
+    messageTemplate,
+    formData.name,
+  );
 
-    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+  const emailMessage = createMessageWithAddress(
+    messageTemplate,
+    formData.name,
+  );
 
-    const submissionData = {
-      ...formData,
-      mobile: cleanedMobile,
-      message: backendMessage,
+  // Clean mobile number
+  const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+
+  const submissionData = {
+    ...formData,
+    mobile: cleanedMobile,
+    message: backendMessage,
+  };
+
+  if (!validateForm(submissionData)) {
+    return;
+  }
+
+  console.log("submission data ==>", submissionData);
+
+  setLoading(true);
+
+  let backendSuccess = false;
+  let emailSuccess = false;
+
+  // 1️⃣ Submit to backend
+  try {
+    const contactRequestData = {
+      name: formData.name,
+      email: formData.email,
+      mobileNumber: cleanedMobile,
+      remark: backendMessage,
+      source: "MANUAL",
+      status: "NEW",
+      propertyName: "Godrej Varanya",
     };
 
-    if (!validateForm(submissionData)) {
-      return;
+    const response = await apiPostRequest({
+      apiUrl: "/contact-requests",
+      content_type: "application/json",
+      data: contactRequestData,
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      backendSuccess = true;
     }
 
-    console.log("submission data ==>", submissionData);
-    setLoading(true);
-    let backendSuccess = false;
-    let emailSuccess = false;
+  } catch (error) {
+    console.error("Backend submission failed:", error);
+    console.error("Backend response:", error.response?.data);
+    console.error("Status code:", error.response?.status);
+  }
 
-    // 1️⃣ Submit to backend
-    try {
-      const response = await axios.post(
-        `${baseurl}/forms/submit`,
-        submissionData,
-      );
-      if (response.status === 201) {
-        backendSuccess = true;
-      }
-    } catch (error) {
-      console.error("Backend submission failed:", error);
-    }
+  // 2️⃣ Send Email via EmailJS
+  try {
+    await emailjs.send(
+      emailKeys.serviceId,
+      emailKeys.templateId,
+      {
+        user_name: formData.name,
+        user_phone: formData.mobile,
+        user_email: formData.email,
+        web_url: credentials.web_url,
+        web_name: credentials.web_name,
+        logo_url: credentials.logo_url,
+        message: emailMessage,
+      },
+      emailKeys.publicKey,
+    );
 
-    // 2️⃣ Send Email via EmailJS
-    try {
-      await emailjs.send(
-        emailKeys.serviceId,
-        emailKeys.templateId,
-        {
-          user_name: formData.name,
-          user_phone: formData.mobile,
-          user_email: formData.email,
-          web_url: credentials.web_url,
-          web_name: credentials.web_name,
-          logo_url: credentials.logo_url,
-          message: emailMessage,
+    emailSuccess = true;
+
+  } catch (error) {
+    console.error("Email submission failed:", error);
+  }
+
+  // 3️⃣ Show result
+  if (backendSuccess || emailSuccess) {
+
+    // Track conversion with gtag
+    if (typeof gtag !== "undefined") {
+      gtag("event", "conversion", {
+        send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+        // value: 1.0,
+        // currency: "INR",
+        event_callback: function () {
+          console.log("Chatbot form conversion tracked");
         },
-        emailKeys.publicKey,
-      );
-      emailSuccess = true;
-    } catch (error) {
-      console.error("Email submission failed:", error);
-    }
-
-    // 3️⃣ Show result
-    if (backendSuccess || emailSuccess) {
-      // Track conversion with gtag
-          if (typeof gtag !== "undefined") {
-        gtag("event", "conversion", {
-          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
-          // value: 1.0,
-          // currency: "INR",
-          event_callback: function () {
-            console.log("Chatbot form conversion tracked");
-          },
-        });
-      }
-      setShowSuccessAlert(true);
-      setFormData({
-        name: "",
-        mobile: "",
-        email: "",
-        source: "godrejkhargar.com",
       });
-      // Notify parent that form was submitted
-      setTimeout(() => {
-        onClose(true);
-      }, 2000);
-    } else {
-      setShowFailureAlert(true);
     }
 
-    setLoading(false);
-  };
+    setShowSuccessAlert(true);
+
+    // Download brochure after successful submission
+    if (
+      mode?.trim().toLowerCase() === "brochure" ||
+      mode?.trim().toLowerCase() === "download brochure"
+    ) {
+      const link = document.createElement("a");
+      link.href = brochurePdf;
+      link.download = "Godrej_Varanya_Kharghar_Brochure.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    setFormData({
+      name: "",
+      mobile: "",
+      email: "",
+      source: "godrejkhargar.com",
+    });
+
+    // Notify parent that form was submitted
+    setTimeout(() => {
+      onClose(true);
+    }, 2000);
+
+  } else {
+    setShowFailureAlert(true);
+  }
+
+  setLoading(false);
+};
+
 
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/60 backdrop-blur-sm">

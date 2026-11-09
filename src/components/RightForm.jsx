@@ -16,6 +16,7 @@ import whatsappAnimIcon from "../assets/gifs/whatsappAnim.gif";
 import freeSiteGif from "../assets/gifs/Free Site Visit.gif";
 import istantCallGif from "../assets/gifs/Instant Call Back.gif";
 import bestPriceGif from "../assets/gifs/Best Price.gif";
+import { apiPostRequest } from "../utils/api/post";
 
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
@@ -57,83 +58,103 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setShowSuccessAlert(false);
-    setShowFailureAlert(false);
-  
-    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
-    const submissionData = {
+ 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setShowSuccessAlert(false);
+  setShowFailureAlert(false);
+
+  const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
+
+  const submissionData = {
+    ...formData,
+    mobile: cleanedMobile,
+  };
+
+  if (!validateForm(submissionData) || !consentChecked) {
+    return;
+  }
+
+  setLoading(true);
+
+  let backendSuccess = false;
+  let emailSuccess = false;
+
+  try {
+    // Create messages with address
+    const backendMessage = createMessageWithAddress(
+      messageTemplates.general,
+      formData.name,
+    );
+
+    const emailMessage = createMessageWithAddress(
+      messageTemplates.general,
+      formData.name,
+    );
+
+    const finalSubmissionData = {
       ...formData,
       mobile: cleanedMobile,
+      message: backendMessage,
     };
 
-    if (!validateForm(submissionData)) {
-      return;
-    }
-
-    setLoading(true);
-    let backendSuccess = false;
-    let emailSuccess = false;
+    // 1️⃣ Submit to backend
+    console.log("Submitting data:", finalSubmissionData);
 
     try {
-      // Create messages with address
-      const backendMessage = createMessageWithAddress(
-        messageTemplates.general,
-        formData.name,
-      );
-      const emailMessage = createMessageWithAddress(
-        messageTemplates.general,
-        formData.name,
-      );
-      const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
-
-      const submissionData = {
-        ...formData,
-        mobile: cleanedMobile,
-        message: backendMessage,
+      const contactRequestData = {
+        name: formData.name,
+        email: formData.email || "",
+        mobileNumber: cleanedMobile,
+        remark: backendMessage,
+        source: "MANUAL",
+        status: "NEW",
+        propertyName: "Godrej Varanya",
       };
-      if (!validateForm(submissionData) || !consentChecked) {
-        return;
-      }
-      // 1️⃣ Submit to backend
-      console.log("Submitting data:", submissionData);
-      try {
-        const response = await axios.post(
-          `${baseurl}/forms/submit`,
-          submissionData,
-        );
-        if (response.status === 201 || response.status === 200) {
-          backendSuccess = true;
-        }
-      } catch (error) {
-        console.error("Backend submission failed:", error);
+
+      const response = await apiPostRequest({
+        apiUrl: "/contact-requests",
+        content_type: "application/json",
+        data: contactRequestData,
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        backendSuccess = true;
       }
 
-      // 2️⃣ Send Email via EmailJS
-      try {
-        await emailjs.send(
-          emailKeys.serviceId,
-          emailKeys.templateId,
-          {
-            user_name: formData.name,
-            user_phone: formData.mobile,
-            user_email: formData.email,
-            web_url: credentials.web_url,
-            web_name: credentials.web_name,
-            logo_url: credentials.logo_url,
-            message: emailMessage,
-          },
-          emailKeys.publicKey,
-        );
-        emailSuccess = true;
-      } catch (error) {
-        console.error("Email submission failed:", error);
-      }
+    } catch (error) {
+      console.error("Backend submission failed:", error);
+      console.error("Backend response:", error.response?.data);
+      console.error("Status code:", error.response?.status);
+    }
 
-      // 3️⃣ Show result
-      if (backendSuccess || emailSuccess) {
-         // Track conversion with gtag
+    // 2️⃣ Send Email via EmailJS
+    try {
+      await emailjs.send(
+        emailKeys.serviceId,
+        emailKeys.templateId,
+        {
+          user_name: formData.name,
+          user_phone: formData.mobile,
+          user_email: formData.email,
+          web_url: credentials.web_url,
+          web_name: credentials.web_name,
+          logo_url: credentials.logo_url,
+          message: emailMessage,
+        },
+        emailKeys.publicKey,
+      );
+
+      emailSuccess = true;
+
+    } catch (error) {
+      console.error("Email submission failed:", error);
+    }
+
+    // 3️⃣ Show result
+    if (backendSuccess || emailSuccess) {
+
+      // Track conversion with gtag
       if (typeof gtag !== "undefined") {
         gtag("event", "conversion", {
           send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
@@ -144,23 +165,28 @@ const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
           },
         });
       }
-        setShowSuccessAlert(true);
-        setFormData({
-          name: "",
-          mobile: "",
-          email: "",
-          source: "godrejkhargar.com",
-        });
-      } else {
-        setShowFailureAlert(true);
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
+
+      setShowSuccessAlert(true);
+
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        source: "godrejkhargar.com",
+      });
+
+    } else {
       setShowFailureAlert(true);
-    } finally {
-      setLoading(false);
     }
-  };
+
+  } catch (error) {
+    console.error("Form submission error:", error);
+    setShowFailureAlert(true);
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className=" lg:flex max-w-md mx-auto bg-white min-h-screen flex-col shadow-lg border border-[#9e7242] sticky top-0">

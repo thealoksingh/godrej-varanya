@@ -31,7 +31,8 @@ const Footer = () => {
         </p>
 
         <p className="text-[14px] font-semibold">
-          Project RERA Number: PM1271012502176
+          {/* Project RERA Number: PM1271012502176 */}
+          MahaRERA Registration No. PM1271012502343 & PM1271012502176
         </p>
 
         <p className="text-[10px] mt-4 text-justify">

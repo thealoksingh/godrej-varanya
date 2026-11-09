@@ -38,7 +38,7 @@ const LowerAboutSection = () => {
           Managing Director and CEO.
         </p>
 
-        <p className="text-justify text-[14px] mt-2">
+        {/* <p className="text-justify text-[14px] mt-2">
           To learn more about the company, visit the{" "}
           <a
             href="https://www.godrejproperties.com/"
@@ -48,7 +48,7 @@ const LowerAboutSection = () => {
           >
             official Godrej Properties website
           </a>.
-        </p>
+        </p> */}
       </div>
     </section>
   );
