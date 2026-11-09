@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, lazy, Suspense } from "react";
+
 import Hero from "../components/Hero";
 import Price from "../components/Price";
 import Amenities from "../components/Amenities";
@@ -9,15 +11,19 @@ import NRIServices from "../components/NRIServices";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import MobileFooter from "../components/MobileFooter";
-import InterestForm from "../components/InterestForm";
 import DynamicSEO from "../components/DynamicSEO";
+
 import AboutPage from "./AboutPage";
 import HighlightPage from "./HighlightPage";
 import AmenitiesPage from "./AmenitiesPage";
 import GalleryPage from "./GalleryPage";
 import ContactPage from "./ContactPage";
 import LowerAboutSection from "./LowerAboutSection";
+
 import GodrejVideo from "../components/GodrejVideo";
+
+// Lazy-loaded Interest Form
+const InterestForm = lazy(() => import("../components/InterestForm"));
 
 // Popup timing configuration
 const INITIAL_POPUP_DELAY = 3000; // 3 seconds
@@ -51,7 +57,9 @@ const HomePage = () => {
     // Then show every 10 seconds
     const repeatTimer = setInterval(() => {
       console.log("Repeat timer fired");
+
       const isSubmitted = localStorage.getItem("interestFormSubmitted");
+
       if (isSubmitted !== "true") {
         console.log("Opening form from repeat timer");
         setIsInterestFormOpen(true);
@@ -67,7 +75,9 @@ const HomePage = () => {
 
   const handleInterestFormClose = (submitted = false) => {
     console.log("Closing form, submitted:", submitted);
+
     setIsInterestFormOpen(false);
+
     if (submitted) {
       console.log("Saving to localStorage");
       localStorage.setItem("interestFormSubmitted", "true");
@@ -76,61 +86,75 @@ const HomePage = () => {
 
   return (
     <>
-   
       <Hero
         onRequestCallBack={() => {
           setIsInterestFormOpen(true);
           setFormMode("Get Detail About Varanya");
         }}
       />
+
+      {/* Interest Form */}
       {isInterestFormOpen && (
-        <InterestForm mode={formMode} onClose={handleInterestFormClose} />
+        <Suspense fallback={null}>
+          <InterestForm
+            mode={formMode}
+            onClose={handleInterestFormClose}
+          />
+        </Suspense>
       )}
+
       <div className="lg:p-4 p-2 bg-[#E2E6E9]">
-           <AboutPage
+        <AboutPage
           onRequestCallBack={() => {
             setIsInterestFormOpen(true);
             setFormMode("Download Brochure");
           }}
         />
+
         <HighlightPage />
+
         <Price
-         onRequestCallBack={() => {
-          setIsInterestFormOpen(true);
-          setFormMode("Get Detail About Varanya");
-        }}
+          onRequestCallBack={() => {
+            setIsInterestFormOpen(true);
+            setFormMode("Get Detail About Varanya");
+          }}
         />
+
         <FloorPlan
-         onRequestCallBack={() => {
-          setIsInterestFormOpen(true);
-          setFormMode("Get Detail About Varanya");
-        }}
-         
+          onRequestCallBack={() => {
+            setIsInterestFormOpen(true);
+            setFormMode("Get Detail About Varanya");
+          }}
         />
 
         <AmenitiesPage />
 
         <GalleryPage />
-        
-        <GodrejVideo/>
+
+        <GodrejVideo />
+
         <Location
           onRequestCallBack={() => {
             setIsInterestFormOpen(true);
             setFormMode("Get Location Detail");
           }}
         />
-        <ContactPage/>
-        <LowerAboutSection/>
-          <Footer />
+
+        <ContactPage />
+
+        <LowerAboutSection />
+
+        <Footer />
       </div>
 
-    
       {/* <NRIServices /> */}
-    
-      <MobileFooter  onRequestCallBack={() => {
+
+      <MobileFooter
+        onRequestCallBack={() => {
           setIsInterestFormOpen(true);
           setFormMode("Get Detail About Varanya");
-        }} />
+        }}
+      />
     </>
   );
 };

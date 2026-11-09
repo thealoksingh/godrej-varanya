@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { X, User, Mail } from "lucide-react";
 import emailjs from "@emailjs/browser";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { credentials, emailKeys, regexPatterns, baseurl } from "../key/key";
+import { credentials, emailKeys, regexPatterns} from "../key/key";
 import {
   createMessageWithAddress,
   messageTemplates,
 } from "../key/messageUtils";
-import axios from "axios";
 import logo from "../assets/godrejLogo.png";
 import { apiPostRequest } from "../utils/api/post";
 import brochurePdf from "../assets/Godrej_Varanya_Kharghar_Brochure.pdf";
@@ -54,155 +53,145 @@ const InterestForm = ({ onClose, mode }) => {
     formHeader = "Download Brochure";
   }
 
- 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setShowSuccessAlert(false);
+    setShowFailureAlert(false);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setShowSuccessAlert(false);
-  setShowFailureAlert(false);
+    // Prepare dynamic message based on mode
+    let messageTemplate = messageTemplates.general;
 
-  // Prepare dynamic message based on mode
-  let messageTemplate = messageTemplates.general;
-
-  if (mode === "callback") {
-    messageTemplate = messageTemplates.callback;
-  } else if (
-    mode === "brochure" ||
-    mode === "download brochure"
-  ) {
-    messageTemplate = messageTemplates.brochure;
-  }
-
-  const backendMessage = createMessageWithAddress(
-    messageTemplate,
-    formData.name,
-  );
-
-  const emailMessage = createMessageWithAddress(
-    messageTemplate,
-    formData.name,
-  );
-
-  // Clean mobile number
-  const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
-
-  const submissionData = {
-    ...formData,
-    mobile: cleanedMobile,
-    message: backendMessage,
-  };
-
-  if (!validateForm(submissionData)) {
-    return;
-  }
-
-  console.log("submission data ==>", submissionData);
-
-  setLoading(true);
-
-  let backendSuccess = false;
-  let emailSuccess = false;
-
-  // 1️⃣ Submit to backend
-  try {
-    const contactRequestData = {
-      name: formData.name,
-      email: formData.email,
-      mobileNumber: cleanedMobile,
-      remark: backendMessage,
-      source: "MANUAL",
-      status: "NEW",
-      propertyName: "Godrej Varanya",
-    };
-
-    const response = await apiPostRequest({
-      apiUrl: "/contact-requests",
-      content_type: "application/json",
-      data: contactRequestData,
-    });
-
-    if (response.status === 200 || response.status === 201) {
-      backendSuccess = true;
+    if (mode === "callback") {
+      messageTemplate = messageTemplates.callback;
+    } else if (mode === "brochure" || mode === "download brochure") {
+      messageTemplate = messageTemplates.brochure;
     }
 
-  } catch (error) {
-    console.error("Backend submission failed:", error);
-    console.error("Backend response:", error.response?.data);
-    console.error("Status code:", error.response?.status);
-  }
-
-  // 2️⃣ Send Email via EmailJS
-  try {
-    await emailjs.send(
-      emailKeys.serviceId,
-      emailKeys.templateId,
-      {
-        user_name: formData.name,
-        user_phone: formData.mobile,
-        user_email: formData.email,
-        web_url: credentials.web_url,
-        web_name: credentials.web_name,
-        logo_url: credentials.logo_url,
-        message: emailMessage,
-      },
-      emailKeys.publicKey,
+    const backendMessage = createMessageWithAddress(
+      messageTemplate,
+      formData.name,
     );
 
-    emailSuccess = true;
+    const emailMessage = createMessageWithAddress(
+      messageTemplate,
+      formData.name,
+    );
 
-  } catch (error) {
-    console.error("Email submission failed:", error);
-  }
+    // Clean mobile number
+    const cleanedMobile = formData.mobile.replace(/\D/g, "").slice(-10);
 
-  // 3️⃣ Show result
-  if (backendSuccess || emailSuccess) {
+    const submissionData = {
+      ...formData,
+      mobile: cleanedMobile,
+      message: backendMessage,
+    };
 
-    // Track conversion with gtag
-    if (typeof gtag !== "undefined") {
-      gtag("event", "conversion", {
-        send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
-        // value: 1.0,
-        // currency: "INR",
-        event_callback: function () {
-          console.log("Chatbot form conversion tracked");
-        },
+    if (!validateForm(submissionData)) {
+      return;
+    }
+
+    console.log("submission data ==>", submissionData);
+
+    setLoading(true);
+
+    let backendSuccess = false;
+    let emailSuccess = false;
+
+    // 1️⃣ Submit to backend
+    try {
+      const contactRequestData = {
+        name: formData.name,
+        email: formData.email,
+        mobileNumber: cleanedMobile,
+        remark: backendMessage,
+        source: "MANUAL",
+        status: "NEW",
+        propertyName: "Godrej Varanya",
+      };
+
+      const response = await apiPostRequest({
+        apiUrl: "/contact-requests",
+        content_type: "application/json",
+        data: contactRequestData,
       });
+
+      if (response.status === 200 || response.status === 201) {
+        backendSuccess = true;
+      }
+    } catch (error) {
+      console.error("Backend submission failed:", error);
+      console.error("Backend response:", error.response?.data);
+      console.error("Status code:", error.response?.status);
     }
 
-    setShowSuccessAlert(true);
+    // 2️⃣ Send Email via EmailJS
+    try {
+      await emailjs.send(
+        emailKeys.serviceId,
+        emailKeys.templateId,
+        {
+          user_name: formData.name,
+          user_phone: formData.mobile,
+          user_email: formData.email,
+          web_url: credentials.web_url,
+          web_name: credentials.web_name,
+          logo_url: credentials.logo_url,
+          message: emailMessage,
+        },
+        emailKeys.publicKey,
+      );
 
-    // Download brochure after successful submission
-    if (
-      mode?.trim().toLowerCase() === "brochure" ||
-      mode?.trim().toLowerCase() === "download brochure"
-    ) {
-      const link = document.createElement("a");
-      link.href = brochurePdf;
-      link.download = "Godrej_Varanya_Kharghar_Brochure.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      emailSuccess = true;
+    } catch (error) {
+      console.error("Email submission failed:", error);
     }
 
-    setFormData({
-      name: "",
-      mobile: "",
-      email: "",
-      source: "godrejkhargar.com",
-    });
+    // 3️⃣ Show result
+    if (backendSuccess || emailSuccess) {
+      // Track conversion with gtag
+      if (typeof gtag !== "undefined") {
+        gtag("event", "conversion", {
+          send_to: "AW-17844583964/giQ6CM3TnfUbEJz8-rxC",
+          // value: 1.0,
+          // currency: "INR",
+          event_callback: function () {
+            console.log("Chatbot form conversion tracked");
+          },
+        });
+      }
 
-    // Notify parent that form was submitted
-    setTimeout(() => {
-      onClose(true);
-    }, 2000);
+      setShowSuccessAlert(true);
 
-  } else {
-    setShowFailureAlert(true);
-  }
+      // Download brochure after successful submission
+      if (
+        mode?.trim().toLowerCase() === "brochure" ||
+        mode?.trim().toLowerCase() === "download brochure"
+      ) {
+        const link = document.createElement("a");
+        link.href = brochurePdf;
+        link.download = "Godrej_Varanya_Kharghar_Brochure.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
 
-  setLoading(false);
-};
+      setFormData({
+        name: "",
+        mobile: "",
+        email: "",
+        source: "godrejkhargar.com",
+      });
 
+      // Notify parent that form was submitted
+      setTimeout(() => {
+        onClose(true);
+      }, 2000);
+    } else {
+      setShowFailureAlert(true);
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/60 backdrop-blur-sm">
@@ -210,11 +199,15 @@ const handleSubmit = async (e) => {
         {/* Header */}
         <div className="relative animated-gradient py-4 text-center">
           <h2 className="text-2xl font-semibold text-white">{formHeader}</h2>
+
           <button
+            type="button"
             onClick={onClose}
+            aria-label="Close modal"
+            title="Close"
             className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
           >
-            <X size={28} strokeWidth={3} />
+            <X size={28} strokeWidth={3} aria-hidden="true" />
           </button>
         </div>
 

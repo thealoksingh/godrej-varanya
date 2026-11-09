@@ -20,7 +20,11 @@ const WEBSITE_URL = "https://godrejkhargar.com";
 const DynamicSEO = () => {
   const location = useLocation();
 
-  const currentSEO = seoData[location.pathname] || seoData["/"];
+ const currentSEO = seoData[location.pathname] || {
+  title: "Godrej Varanya | Premium Homes in Kharghar | New Launches In Navi Mumbai",
+  description:
+    "Discover Godrej Varanya in Kharghar, Navi Mumbai. Explore project details, amenities, pricing and more.",
+};
   const canonicalURL = `${WEBSITE_URL}${location.pathname}`;
 
   return (

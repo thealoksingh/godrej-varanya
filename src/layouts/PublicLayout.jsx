@@ -1,15 +1,17 @@
 
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import Header from "../components/Header";
 import RightForm from "../components/RightForm";
-import InterestForm from "../components/InterestForm";
-import ChatBot from "../chatbot/Chatbot";
-
 import DynamicSEO from "../components/DynamicSEO";
+
 import whatsAppIcon from "../assets/whatsAppIcon.png";
 import { contactConfig } from "../config/credential";
+
+// Lazy-loaded components
+const InterestForm = lazy(() => import("../components/InterestForm"));
+const ChatBot = lazy(() => import("../chatbot/Chatbot"));
 
 const PublicLayout = () => {
   const [isInterestFormOpen, setIsInterestFormOpen] = useState(false);
@@ -26,16 +28,18 @@ const PublicLayout = () => {
     setFormMode("");
   };
 
-  const whatsappUrl = `https://wa.me/${contactConfig.phoneNumber.replace(/\D/g, "")}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`;
+  const whatsappUrl = `https://wa.me/${contactConfig.phoneNumber.replace(
+    /\D/g,
+    ""
+  )}?text=${encodeURIComponent(contactConfig.whatsappMessage)}`;
 
   return (
     <div className="flex w-full min-h-screen">
-       <DynamicSEO />
+      <DynamicSEO />
+
       {/* Main Website Content */}
       <div className="w-full md:w-[80%]">
-        <Header
-          onBrochureClick={() => handleFormOpen("brochure")}
-        />
+        <Header onBrochureClick={() => handleFormOpen("brochure")} />
 
         <main id="main-content">
           <Outlet />
@@ -52,10 +56,12 @@ const PublicLayout = () => {
 
       {/* Enquiry Modal */}
       {isInterestFormOpen && (
-        <InterestForm
-          mode={formMode}
-          onClose={handleFormClose}
-        />
+        <Suspense fallback={null}>
+          <InterestForm
+            mode={formMode}
+            onClose={handleFormClose}
+          />
+        </Suspense>
       )}
 
       {/* Desktop Floating WhatsApp Button */}
@@ -76,10 +82,14 @@ const PublicLayout = () => {
       </a>
 
       {/* Chatbot */}
-      <ChatBot
-        open={openChatBot}
-        setOpen={setOpenChatBot}
-      />
+      {openChatBot && (
+        <Suspense fallback={null}>
+          <ChatBot
+            open={openChatBot}
+            setOpen={setOpenChatBot}
+          />
+        </Suspense>
+      )}
     </div>
   );
 };
