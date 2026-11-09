@@ -7,6 +7,7 @@ import RightForm from "../components/RightForm";
 import InterestForm from "../components/InterestForm";
 import ChatBot from "../chatbot/Chatbot";
 
+import DynamicSEO from "../components/DynamicSEO";
 import whatsAppIcon from "../assets/whatsAppIcon.png";
 import { contactConfig } from "../config/credential";
 
@@ -29,6 +30,7 @@ const PublicLayout = () => {
 
   return (
     <div className="flex w-full min-h-screen">
+       <DynamicSEO />
       {/* Main Website Content */}
       <div className="w-full md:w-[80%]">
         <Header

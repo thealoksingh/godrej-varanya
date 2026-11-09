@@ -76,7 +76,7 @@ const HomePage = () => {
 
   return (
     <>
-      <DynamicSEO />
+   
       <Hero
         onRequestCallBack={() => {
           setIsInterestFormOpen(true);

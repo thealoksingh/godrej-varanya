@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import PublicLayout from "./layouts/PublicLayout";
-import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import PrivacyPage from "./pages/PrivacyPage";
 
@@ -35,7 +33,6 @@ function App() {
             element={<Navigate to="/#gallery" replace />}
           />
 
-          <Route path="/about" element={<AboutPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
         </Route>
 

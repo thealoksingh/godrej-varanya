@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
 
 const seoData = {
@@ -8,13 +8,6 @@ const seoData = {
     description:
       "Explore Godrej Varanya in Kharghar, Navi Mumbai. Discover 2 & 3 BHK apartments, project amenities, floor plans, pricing and location details.",
   },
-
-  "/about": {
-    title: "About Godrej Varanya | Kharghar, Navi Mumbai",
-    description:
-      "Learn about Godrej Varanya, its residential offerings, location and features in Kharghar, Navi Mumbai.",
-  },
-
   "/privacy": {
     title: "Privacy Policy | Godrej Varanya",
     description:
@@ -22,35 +15,32 @@ const seoData = {
   },
 };
 
+const WEBSITE_URL = "https://godrejkhargar.com";
+
 const DynamicSEO = () => {
   const location = useLocation();
 
-  useEffect(() => {
-    const currentSEO = seoData[location.pathname] || seoData["/"];
+  const currentSEO = seoData[location.pathname] || seoData["/"];
+  const canonicalURL = `${WEBSITE_URL}${location.pathname}`;
 
-    document.title = currentSEO.title;
+  return (
+    <Helmet>
+      <title>{currentSEO.title}</title>
 
-    let description = document.querySelector(
-      'meta[name="description"]'
-    );
+      <meta name="description" content={currentSEO.description} />
 
-    if (description) {
-      description.setAttribute("content", currentSEO.description);
-    }
+      <link rel="canonical" href={canonicalURL} />
 
-    let canonical = document.querySelector(
-      'link[rel="canonical"]'
-    );
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content={currentSEO.title} />
+      <meta property="og:description" content={currentSEO.description} />
+      <meta property="og:url" content={canonicalURL} />
 
-    if (canonical) {
-      canonical.setAttribute(
-        "href",
-        `https://godrejkhargar.com${location.pathname}`
-      );
-    }
-  }, [location.pathname]);
-
-  return null;
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={currentSEO.title} />
+      <meta name="twitter:description" content={currentSEO.description} />
+    </Helmet>
+  );
 };
 
 export default DynamicSEO;
