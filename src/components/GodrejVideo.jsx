@@ -1,5 +1,10 @@
+
 import React, { useState } from "react";
-import { FiArrowUpRight, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import {
+  FiArrowUpRight,
+  FiChevronLeft,
+  FiChevronRight,
+} from "react-icons/fi";
 
 const videos = [
   {
@@ -20,11 +25,15 @@ const GodrejVideo = () => {
   const currentVideo = videos[activeVideo];
 
   const handlePrevious = () => {
-    setActiveVideo((prev) => (prev === 0 ? videos.length - 1 : prev - 1));
+    setActiveVideo((prev) =>
+      prev === 0 ? videos.length - 1 : prev - 1
+    );
   };
 
   const handleNext = () => {
-    setActiveVideo((prev) => (prev === videos.length - 1 ? 0 : prev + 1));
+    setActiveVideo((prev) =>
+      prev === videos.length - 1 ? 0 : prev + 1
+    );
   };
 
   return (
@@ -58,25 +67,15 @@ const GodrejVideo = () => {
           {/* YouTube Video */}
           <iframe
             key={currentVideo.id}
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            src={`https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=0&rel=0&playsinline=1`}
-            title="Godrej Varanya Property Video"
+            className="absolute inset-0 w-full h-full"
+            src={`https://www.youtube-nocookie.com/embed/${currentVideo.id}?autoplay=1&mute=1&loop=1&playlist=${currentVideo.id}&controls=1&rel=0&playsinline=1`}
+            title={currentVideo.title}
             allow="autoplay; encrypted-media; picture-in-picture"
             allowFullScreen
           />
 
-          {/* Clickable Overlay */}
-          <a
-            href="https://virtualrealty.org.in/properties"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Explore properties on Virtual Realty"
-            className="absolute inset-0 z-10 bg-transparent
-            hover:bg-black/[0.03] transition-colors duration-300"
-          />
-
           {/* Bottom CTA */}
-          <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none">
+          <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
             <div className="bg-gradient-to-t from-black/80 via-black/30 to-transparent px-5 sm:px-8 py-6 sm:py-10">
               <div className="flex items-end justify-between gap-4">
                 <div>
@@ -92,7 +91,7 @@ const GodrejVideo = () => {
                   </h3>
 
                   <p className="text-white/80 text-xs sm:text-sm mt-2">
-                    Click anywhere to explore our properties.
+                    Explore our premium property collection.
                   </p>
                 </div>
 
@@ -113,6 +112,8 @@ const GodrejVideo = () => {
 
         {/* Video Navigation */}
         <div className="flex items-center justify-center gap-5 mt-6">
+
+          {/* Previous Video */}
           <button
             onClick={handlePrevious}
             aria-label="Previous video"
@@ -123,6 +124,7 @@ const GodrejVideo = () => {
             <FiChevronLeft className="text-xl" />
           </button>
 
+          {/* Video Pagination */}
           <div className="flex items-center gap-2">
             {videos.map((video, index) => (
               <button
@@ -144,17 +146,20 @@ const GodrejVideo = () => {
             ))}
           </div>
 
-          <button
-            onClick={handleNext}
-            aria-label="Next video"
+          {/* Next Arrow - Opens Properties Page */}
+          <a
+            href="https://virtualrealty.org.in/properties"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Explore Virtual Realty properties"
             className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center
             border border-[#6b8d14]/40 text-[#6b8d14]
             hover:bg-[#6b8d14] hover:text-white transition-all duration-300"
           >
             <FiChevronRight className="text-xl" />
-          </button>
-        </div>
+          </a>
 
+        </div>
       </div>
     </section>
   );
