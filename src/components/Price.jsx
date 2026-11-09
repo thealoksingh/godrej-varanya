@@ -7,12 +7,12 @@ const priceData = [
   {
     type: "2 BHK",
     area: "725 - 775 Sq. Ft.",
-    price: "₹ 2.25 Cr* - 2.39 Cr*",
+    price: "₹ 2.3 Cr Onwards*",
   },
   {
     type: "3 BHK",
     area: "1100 - 1200 Sq. Ft.",
-    price: "₹ 3.99 Cr* - 4.39 Cr*",
+    price: "₹ 3.67 Cr Onwards*",
   },
 ];
 
@@ -74,7 +74,7 @@ const Price = ({ onRequestCallBack }) => {
                         onClick={onRequestCallBack}
                         className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px] font-semibold transition-all active:scale-95 cursor-pointer mb-2"
                       >
-                        Complete Costing Details
+                        Request For Best Price
                       </button>
                     </td>
                   </tr>
@@ -110,7 +110,7 @@ const Price = ({ onRequestCallBack }) => {
                   onClick={onRequestCallBack}
                   className="animated-gradient animated-border text-white px-10 py-2 rounded-lg text-[16px] font-semibold transition-all active:scale-95 cursor-pointer mb-2"
                 >
-                  Complete Costing Details
+                  Request For Best Price
                 </button>
               </div>
             ))}
