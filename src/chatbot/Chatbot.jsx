@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { FiSend, FiX, FiMessageCircle, FiPhone, FiUser } from "react-icons/fi";
-
+// import { FiX } from "react-icons/fi";
 import emailjs from "@emailjs/browser";
 import { credentials, emailKeys, baseurl } from "../key/key";
 import axios from "axios";

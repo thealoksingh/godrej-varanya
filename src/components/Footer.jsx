@@ -1,23 +1,39 @@
 import React from "react";
 import reraQr from "../assets/reraQrCode.png";
 import logo from "../assets/godrejLogo.png";
+
 const Footer = () => {
   return (
     <footer className="w-full font-sans text-[#333] bg-cyan-200">
       <div className="bg-[#EFEBEB] flex justify-center items-center p-6 flex-col">
         <img
           src={logo}
-          alt="godrej varanya logo"
-          className=" w-54  p-1  hover:scale-105 transition-transform duration-200"
+          alt="Godrej Varanya"
+          className="w-54 p-1 hover:scale-105 transition-transform duration-200"
+          loading="lazy"
+          decoding="async"
         />
+
         <img
           src={reraQr}
-          alt="godrej varanya logo"
-          className=" w-32  p-1 mt-4 hover:scale-105 transition-transform duration-200"
+          alt="MahaRERA registration QR code for Godrej Varanya"
+          className="w-32 p-1 mt-4 hover:scale-105 transition-transform duration-200"
+          loading="lazy"
+          decoding="async"
         />
-        <p className="text-[11px]">This project is RERA registered. </p>
-        <p className="text-[14px]">Agent Rera Number : A51900029955</p>
-        <p className="text-[14px] font-semibold">Project Rera Number : PM1271012502176</p>
+
+        <p className="text-[11px]">
+          This project is RERA registered.
+        </p>
+
+        <p className="text-[14px]">
+          Agent RERA Number: A51900029955
+        </p>
+
+        <p className="text-[14px] font-semibold">
+          Project RERA Number: PM1271012502176
+        </p>
+
         <p className="text-[10px] mt-4 text-justify">
           The content presented on this website is solely for informational
           purposes and does not constitute a service offer. Prices mentioned
@@ -37,13 +53,15 @@ const Footer = () => {
           us directly via the provided contact information on this website. We
           appreciate your visit.
         </p>
-        <a 
-         href="/privacy"
+
+        <a
+          href="/privacy"
+          className="text-[12px] text-gray-600 hover:underline mt-2"
         >
- <p className="text-[12px] text-gray-600">© Privacy Policy | Terms & Conditions</p>
-      
+          Privacy Policy
         </a>
-        </div>
+      </div>
+
       <div className="bg-black flex justify-center items-center h-10 rounded-b-lg text-white text-[12px]">
         <p>All Rights Reserved. © 2026 PropSolutions4U Pvt. Ltd.</p>
       </div>
