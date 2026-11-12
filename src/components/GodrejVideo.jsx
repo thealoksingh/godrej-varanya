@@ -188,17 +188,16 @@ const GodrejVideo = () => {
           </div>
 
           {/* Explore Properties */}
-          <a
-            href="https://virtualrealty.org.in/properties"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Explore Virtual Realty properties"
-            className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next video"
+             className="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center
             border border-[#6b8d14]/40 text-[#6b8d14]
             hover:bg-[#6b8d14] hover:text-white transition-all duration-300"
           >
             <FiChevronRight className="text-xl" />
-          </a>
+          </button>
 
         </div>
       </div>

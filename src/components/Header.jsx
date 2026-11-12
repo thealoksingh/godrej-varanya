@@ -180,11 +180,9 @@ const Header = ({ onBrochureClick }) => {
           <img
             src={logo}
             alt="Godrej Varanya"
-            width="216"
-            height="48"
-            fetchPriority="high"
-            className="w-54 p-1 hover:scale-105 transition-transform duration-200"
-          />
+            width="162"
+height="36"
+className="w-[162px] h-auto p-1 hover:scale-105 transition-transform duration-200"  />
         </Link>
 
         {/* Desktop Navigation */}

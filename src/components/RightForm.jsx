@@ -17,7 +17,7 @@ import freeSiteGif from "../assets/gifs/Free Site Visit.gif";
 import istantCallGif from "../assets/gifs/Instant Call Back.gif";
 import bestPriceGif from "../assets/gifs/Best Price.gif";
 import { apiPostRequest } from "../utils/api/post";
-
+import satyamMetroImage from "../assets/satyam-metro-dev.avif";
 const RightForm = ({ onRequestCallBack, onChatBotClick }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -394,6 +394,46 @@ const handleSubmit = async (e) => {
             </p>
           </div>
         </div>
+
+
+
+{/* Sponsored Property Advertisement */}
+<div className="mt-2 flex justify-center">
+  <a
+    href="https://virtualrealty.org.in/property"
+    target="_blank"
+    rel="noopener noreferrer sponsored"
+    aria-label="Advertisement: Explore properties with Virtual Realty"
+    className="group relative block w-full max-w-[200px] overflow-hidden rounded"
+  >
+    <img
+      src={satyamMetroImage}
+      alt="Satyam Metro Development"
+      loading="lazy"
+      className="block h-auto w-full"
+    />
+
+    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
+
+    <span className="absolute left-1.5 top-1.5 rounded bg-black/50 px-1 py-0.5 text-[8px] text-white">
+      AD
+    </span>
+
+    <div className="absolute inset-x-0 bottom-0 p-2">
+      <p className="text-[9px] font-medium text-[#E5C98D]">
+        Virtual Realty
+      </p>
+      <p className="mt-0.5 text-[11px] font-semibold leading-tight text-white">
+        Discover Your Next Property
+      </p>
+      <p className="mt-0.5 text-[9px] text-white/80">
+        Explore New Launches →
+      </p>
+    </div>
+  </a>
+</div>
+
+
       </div>
        {/* <div className="mt-auto p-6 ">
         <a

@@ -8,10 +8,10 @@ import DynamicSEO from "../components/DynamicSEO";
 
 import whatsAppIcon from "../assets/whatsAppIcon.png";
 import { contactConfig } from "../config/credential";
+import ChatBot from "../chatbot/Chatbot";
 
 // Lazy-loaded components
 const InterestForm = lazy(() => import("../components/InterestForm"));
-const ChatBot = lazy(() => import("../chatbot/Chatbot"));
 
 const PublicLayout = () => {
   const [isInterestFormOpen, setIsInterestFormOpen] = useState(false);
@@ -82,14 +82,8 @@ const PublicLayout = () => {
       </a>
 
       {/* Chatbot */}
-      {openChatBot && (
-        <Suspense fallback={null}>
-          <ChatBot
-            open={openChatBot}
-            setOpen={setOpenChatBot}
-          />
-        </Suspense>
-      )}
+            <ChatBot open={openChatBot} setOpen={setOpenChatBot} />
+
     </div>
   );
 };
