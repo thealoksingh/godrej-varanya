@@ -400,7 +400,7 @@ const handleSubmit = async (e) => {
 {/* Sponsored Property Advertisement */}
 <div className="mt-2 flex justify-center">
   <a
-    href="https://virtualrealty.org.in/property"
+    href="https://virtualrealty.org.in/properties/14/satyam-metro-showstopper-one-crest-luxury-2-3-4-bhk-residences-in-sector-20-kharghar-navi-mumbai"
     target="_blank"
     rel="noopener noreferrer sponsored"
     aria-label="Advertisement: Explore properties with Virtual Realty"
